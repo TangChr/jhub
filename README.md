@@ -1,7 +1,6 @@
 github-api
 ==========
-
-JavaScript implementation of the GitHub API
+JavaScript bindings for the GitHub API
 Examples
 --------
 ```javascript
