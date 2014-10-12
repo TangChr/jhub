@@ -1,15 +1,13 @@
-/*!
- * github-api v1.0 (https://github.com/ChrTang/github-api)
- * Copyright 2014 Christian Tang
- * Licensed under MIT (https://github.com/ChrTang/github-api/master/LICENSE)
- */
- 
+// [github-api](https://github.com/ChrTang/github-api) 1.0.0
+// (c) 2014 Christian Tang
+// Freely distributable under the MIT license.
+
 (function (root) {
     var user = '';
     
     var previousGithub = root.github;
     var github = {};
-    github.VERSION = '1.0';
+    github.VERSION = '1.0.0';
     
     github.init = function (userName) {
         user = userName;

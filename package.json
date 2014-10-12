@@ -1,0 +1,14 @@
+{
+  "name"        : "github-api",
+  "description" : "JavaScript bindings for the GitHub API",
+  "version"     : "1.0.0",
+  "homepage"    : "https://github.com/ChrTang/github-api",
+  "bugs"        : {"url"   : "https://github.com/ChrTang/github-api/issues"},
+  "author"      : "Alasdair Mercer <christian@tcdev.dk> (http://tangc.dk)",
+  "licenses"    : [{"type" : "MIT",
+                    "url"  : "https://github.com/ChrTang/github-api/master/LICENSE.md"}],
+  "keywords"    : ["github", "api", "repo", "repository", "git", "gist", "jsonp"],
+  "repository"  : {"type"  : "git",
+                   "url"   : "git://github.com/ChrTang/github-api.git"},
+  "main"        : "github.js"
+}
