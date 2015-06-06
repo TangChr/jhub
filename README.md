@@ -5,7 +5,7 @@ Examples
 --------
 ```javascript
 /* Get repositories */
-var git = github.init("ChrTang");
+var git = github.init("TangChr");
 git.repos(function(result) {
   for(i in result) {
     console.log(result[i].name);
@@ -14,7 +14,7 @@ git.repos(function(result) {
 ```
 ```javascript
 /* Get starred repositories */
-var git = github.init("ChrTang");
+var git = github.init("TangChr");
 git.starred(function(result) {
   for(i in result) {
     console.log(result[i].name);
@@ -23,7 +23,7 @@ git.starred(function(result) {
 ```
 ```javascript
 /* Get releases */
-var git = github.init("ChrTang");
+var git = github.init("TangChr");
 var gh = git.repo("github-api");
 gh.releases(function(result) {
   for(i in result)
@@ -32,7 +32,7 @@ gh.releases(function(result) {
 ```
 ```javascript
 /* Get commits */
-var git = github.init("ChrTang");
+var git = github.init("TangChr");
 var gh = git.repo("github-api");
 gh.commits(function(result) {
   for(i in result)
