@@ -36,7 +36,7 @@
         jsonp("https://api.github.com/users/"+user+"/repos", function(result) {
             var tmp = [];
             for(i in result.data)
-                tmp.push({ name: result.data[i].name, fullName: result.data[i].full_name, url: result.data[i].url });
+                tmp.push({ name: result.data[i].name, fullName: result.data[i].full_name, description: result.data[i].description, url: result.data[i].url, html_url: result.data[i].html_url });
             callback(tmp);
         });
         return this;
