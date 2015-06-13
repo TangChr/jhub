@@ -104,8 +104,8 @@
                 tmp.push({
                     id: result.data[i].id,
                     description: result.data[i].description,
-                    url: result.data[i].url 
-                    });
+                    url: result.data[i].html_url
+                });
             callback(tmp);
         });
         return this;
@@ -128,6 +128,25 @@
                        type: result.data.files[i].type 
                     });
                 callback(tmp);
+        });
+    }
+    
+    github.gist.prototype.get = function (callback) {
+        jsonp("https://api.github.com/gists/"+this.gistId, function(result) {
+                var gist = {};
+                gist.description = result.data.description;
+                gist.url = result.data.html_url;
+                var files = [];
+                for(i in result.data.files)
+                    files.push({
+                       name: result.data.files[i].filename,
+                       language: result.data.files[i].language,
+                       url: result.data.files[i].raw_url,
+                       size: result.data.files[i].size,
+                       type: result.data.files[i].type 
+                    });
+                gist.files = files;
+                callback(gist);
         });
     }
     
