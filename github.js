@@ -36,7 +36,18 @@
         jsonp("https://api.github.com/users/"+user+"/repos", function(result) {
             var tmp = [];
             for(i in result.data)
-                tmp.push({ name: result.data[i].name, fullName: result.data[i].full_name, description: result.data[i].description, url: result.data[i].url, html_url: result.data[i].html_url });
+                tmp.push({
+                    name: result.data[i].name,
+                    fullName: result.data[i].full_name,
+                    description: result.data[i].description,
+                    url: result.data[i].url,
+                    html_url: result.data[i].html_url,
+                    default_branch: result.data[i].default_branch,
+                    stars: result.data[i].stargazers_count,
+                    forks: result.data[i].forks_count,
+                    homepage: result.data[i].homepage,
+                    has_pages: result.data[i].has_pages
+                });
             callback(tmp);
         });
         return this;
@@ -47,7 +58,11 @@
         jsonp("https://api.github.com/users/"+user+"/starred", function(result) {
             var tmp = [];
             for(i in result.data)
-                tmp.push({ name: result.data[i].name, fullName: result.data[i].full_name, url: result.data[i].url });
+                tmp.push({
+                    name: result.data[i].name,
+                    fullName: result.data[i].full_name,
+                    url: result.data[i].url
+                });
             callback(tmp);
         });
         return this; 
@@ -68,8 +83,16 @@
                 
                 for(i in result.data)
                     tmp.push({
-                        author: { name: result.data[i].author.name, email: result.data[i].author.email, date: result.data[i].author.date },
-                        committer: { name: result.data[i].committer.name, email: result.data[i].committer.email, date: result.data[i].committer.date },
+                        author: {
+                            name: result.data[i].author.name,
+                            email: result.data[i].author.email,
+                            date: result.data[i].author.date
+                        },
+                        committer: {
+                            name: result.data[i].committer.name,
+                            email: result.data[i].committer.email,
+                            date: result.data[i].committer.date
+                        },
                         message: result.data[i].message
                     });
                 callback(tmp);
