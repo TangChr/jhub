@@ -1,11 +1,11 @@
-github-api
+ghub.js
 ==========
 JavaScript bindings for the GitHub API
 Examples
 --------
 ```javascript
 /* Get repositories */
-var git = github.init("TangChr");
+var git = ghub.init('TangChr');
 git.repos(function(result) {
   for(i in result) {
     console.log(result[i].name);
@@ -14,7 +14,7 @@ git.repos(function(result) {
 ```
 ```javascript
 /* Get starred repositories */
-var git = github.init("TangChr");
+var git = ghub.init('TangChr');
 git.starred(function(result) {
   for(i in result) {
     console.log(result[i].name);
@@ -23,17 +23,17 @@ git.starred(function(result) {
 ```
 ```javascript
 /* Get releases */
-var git = github.init("TangChr");
-var gh = git.repo("github-api");
+var git = ghub.init('TangChr');
+var gh = git.repo('ghub.js');
 gh.releases(function(result) {
   for(i in result)
-    console.log(result[i].tagName + ": " + result[i].name);
+    console.log(result[i].tagName + ': ' + result[i].name);
 });
 ```
 ```javascript
 /* Get commits */
-var git = github.init("TangChr");
-var gh = git.repo("github-api");
+var git = ghub.init('TangChr');
+var gh = git.repo('ghub.js');
 gh.commits(function(result) {
   for(i in result)
     console.log(result[i].author);
