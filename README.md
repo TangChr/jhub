@@ -1,4 +1,4 @@
-ghub.js
+ghub
 ==========
 JavaScript bindings for the GitHub API
 Examples

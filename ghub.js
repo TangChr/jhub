@@ -1,4 +1,4 @@
-// [ghub.js](https://github.com/ChrTang/ghub.js) 1.0.0
+// [ghub.js](https://github.com/ChrTang/ghub) 1.0.0
 // (c) 2015 Christian Tang
 // Freely distributable under the MIT license.
 
@@ -176,7 +176,7 @@
     // Utility functions
     // -----------------
     
-    // Run ghub.js in *noConflict* mode, returning the `ghub` variable to its
+    // Run ghub in *noConflict* mode, returning the `ghub` variable to its
   // previous owner.  
   // Returns a reference to `ghub`.
     ghub.noConflict = function () {
