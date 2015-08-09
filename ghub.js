@@ -35,19 +35,10 @@
         
         jsonp("https://api.github.com/users/"+user+"/repos", function(result) {
             var tmp = [];
-            for(i in result.data)
-                tmp.push({
-                    name: result.data[i].name,
-                    fullName: result.data[i].full_name,
-                    description: result.data[i].description,
-                    url: result.data[i].url,
-                    html_url: result.data[i].html_url,
-                    default_branch: result.data[i].default_branch,
-                    stars: result.data[i].stargazers_count,
-                    forks: result.data[i].forks_count,
-                    homepage: result.data[i].homepage,
-                    has_pages: result.data[i].has_pages
-                });
+            for(i in result.data) {
+				var r = __buildRepo(result.data[i]);
+                tmp.push(r);
+			}
             callback(tmp);
         });
         return this;
@@ -57,16 +48,30 @@
         
         jsonp("https://api.github.com/users/"+user+"/starred", function(result) {
             var tmp = [];
-            for(i in result.data)
-                tmp.push({
-                    name: result.data[i].name,
-                    fullName: result.data[i].full_name,
-                    url: result.data[i].url
-                });
+            for(i in result.data) {
+				var r = __buildRepo(result.data[i]);
+                tmp.push(r);
+			}
             callback(tmp);
         });
         return this; 
     }
+	
+	function __buildRepo(info) {
+		var repo = {
+		name: info.name,
+			fullName: info.full_name,
+			description: info.description,
+			url: info.url,
+			html_url: info.html_url,
+			default_branch: info.default_branch,
+			stars: info.stargazers_count,
+			forks: info.forks_count,
+			homepage: info.homepage,
+			has_pages: info.has_pages
+		};
+		return repo;
+	}
     
     ///////////////////////////////////////////////////////////////////////
     //                          User Repository Info
