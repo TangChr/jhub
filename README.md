@@ -6,7 +6,7 @@ Examples
 ```javascript
 /* Get repositories */
 var git = ghub.init('TangChr');
-git.repos(function(result) {
+git.userRepos(function(result) {
   for(i in result) {
     console.log(result[i].name);
   }
@@ -15,7 +15,7 @@ git.repos(function(result) {
 ```javascript
 /* Get starred repositories */
 var git = ghub.init('TangChr');
-git.starred(function(result) {
+git.starredRepos(function(result) {
   for(i in result) {
     console.log(result[i].name);
   }
@@ -24,7 +24,7 @@ git.starred(function(result) {
 ```javascript
 /* Get releases */
 var git = ghub.init('TangChr');
-var gh = git.repo('ghub.js');
+var gh = git.userRepo('ghub');
 gh.releases(function(result) {
   for(i in result)
     console.log(result[i].tagName + ': ' + result[i].name);
@@ -33,7 +33,7 @@ gh.releases(function(result) {
 ```javascript
 /* Get commits */
 var git = ghub.init('TangChr');
-var gh = git.repo('ghub.js');
+var gh = git.userRepo('ghub');
 gh.commits(function(result) {
   for(i in result)
     console.log(result[i].author);
