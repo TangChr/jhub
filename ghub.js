@@ -14,28 +14,13 @@
         return this;
     }
     
-    ///////////////////////////////////////////////////////////////////////
-    //                          JSONP
-    ///////////////////////////////////////////////////////////////////////
-    function jsonp(url, callback) {
-        ghub.__jsonp_callback = function(result) {
-            callback(result);
-        }
-        var head   = document.getElementsByTagName('head')[0];
-        var script = document.createElement('script');
-        script.setAttribute('src', url+'?callback=ghub.__jsonp_callback');
-        head.appendChild(script);
-        head.removeChild(script);
-    }
-    
-    ///////////////////////////////////////////////////////////////////////
-    //                          User Repositories
-    ///////////////////////////////////////////////////////////////////////
+    // Repositories
+    // ------------
     ghub.userRepos = function (callback) {
         jsonp('https://api.github.com/users/'+this.loginName+'/repos', function(result) {
             var tmp = [];
             for(i in result.data) {
-				var r = __buildRepo(result.data[i]);
+				var r = __repo(result.data[i]);
                 tmp.push(r);
 			}
             callback(tmp);
@@ -48,7 +33,7 @@
         jsonp('https://api.github.com/users/'+this.loginName+'/starred', function(result) {
             var tmp = [];
             for(i in result.data) {
-				var r = __buildRepo(result.data[i]);
+				var r = __repo(result.data[i]);
                 tmp.push(r);
 			}
             callback(tmp);
@@ -56,12 +41,11 @@
         return this; 
     }
     
-    ///////////////////////////////////////////////////////////////////////
-    //                          User Repository Info
-    ///////////////////////////////////////////////////////////////////////
+    // Repository
+    // ----------
     ghub.userRepo = function (repoName) {
         if (!(this instanceof ghub.userRepo)) return new ghub.userRepo(repoName);
-        this.repoName = repoName;
+        this.repoName  = repoName;
         this.loginName = loginName;
     };
     
@@ -72,16 +56,16 @@
                 for(i in result.data)
                     tmp.push({
                         author: {
-                            name: result.data[i].author.name,
+                            name:  result.data[i].author.name,
                             email: result.data[i].author.email,
-                            date: result.data[i].author.date
+                            date:  result.data[i].author.date
                         },
                         committer: {
-                            name: result.data[i].committer.name,
+                            name:  result.data[i].committer.name,
                             email: result.data[i].committer.email,
-                            date: result.data[i].committer.date
+                            date:  result.data[i].committer.date
                         },
-                        message: result.data[i].message
+                        message:   result.data[i].message
                     });
                 callback(tmp);
         });
@@ -93,11 +77,11 @@
                 for(i in result.data)
                     tmp.push({
                         tagName: result.data[i].tag_name,
-                        name: result.data[i].name,
-                        branch: result.data[i].target_commitish,
-                        draft: result.data[i].draft,
-                        author: { login: result.data[i].author.login, url: result.data[i].author.url },
-                        url: result.data[i].html_url,
+                        name:    result.data[i].name,
+                        branch:  result.data[i].target_commitish,
+                        draft:   result.data[i].draft,
+                        author:  { login: result.data[i].author.login, url: result.data[i].author.url },
+                        url:     result.data[i].html_url,
                         
                     });
                 callback(tmp);
@@ -105,9 +89,8 @@
         return this;
     }
     
-    ///////////////////////////////////////////////////////////////////////
-    //                          Organizations
-    ///////////////////////////////////////////////////////////////////////
+    // Organizations
+    // -------------
     ghub.userOrgs = function (callback) {
         
         jsonp('https://api.github.com/users/'+this.loginName+'/orgs', function(result) {
@@ -123,6 +106,8 @@
         return this;
     }
     
+    // Organization
+    // ------------
     ghub.org = function (orgLogin) {
         if (!(this instanceof ghub.org)) return new ghub.org(orgLogin);
         this.orgLogin = orgLogin;
@@ -131,13 +116,13 @@
     ghub.org.prototype.get = function (callback) {
         jsonp('https://api.github.com/orgs/'+this.orgLogin, function(result) {
             var org = {
-                id:          result.data.id,
-                login:       result.data.login,
-                name:        result.data.name,
-                description: result.data.description,
-                blog:        result.data.blog,
-                html_url:    result.data.html_url,
-                publicRepos: result.data.public_repos
+                id:           result.data.id,
+                login:        result.data.login,
+                name:         result.data.name,
+                description:  result.data.description,
+                blog:         result.data.blog,
+                html_url:     result.data.html_url,
+                public_repos: result.data.public_repos
             };
             callback(org);
         });
@@ -161,7 +146,7 @@
             var tmp = []
             for(i in result.data)
             {
-                var r = __buildRepo(result.data[i]);
+                var r = __repo(result.data[i]);
                 tmp.push(r);
             }
             callback(tmp);
@@ -169,9 +154,8 @@
         return this;
     }
     
-    ///////////////////////////////////////////////////////////////////////
-    //                          Users
-    ///////////////////////////////////////////////////////////////////////
+    // User
+    // ----
     ghub.user = function (userLogin) {
         if (!(this instanceof ghub.user)) return new ghub.user(userLogin);
         this.userLogin = userLogin;
@@ -192,9 +176,9 @@
         return this;
     }
     
-    ///////////////////////////////////////////////////////////////////////
-    //                          Gists
-    ///////////////////////////////////////////////////////////////////////
+    
+    // Gists
+    // -----
     ghub.userGists = function (callback) {
         
         jsonp('https://api.github.com/users/'+this.loginName+'/gists', function(result) {
@@ -210,6 +194,8 @@
         return this;
     }
     
+    // Gist
+    // ----
     ghub.gist = function (gistId) {
         if (!(this instanceof ghub.gist)) return new ghub.gist(gistId);
         this.gistId = gistId;
@@ -219,7 +205,7 @@
         jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
                 var files = [];
                 for(i in result.data.files)
-                    files.push(__buildGistFile(result.data.files[i]));
+                    files.push(__gistFile(result.data.files[i]));
                 callback(files);
         });
         return this;
@@ -228,7 +214,7 @@
     ghub.gist.prototype.get = function (callback) {
         jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
             var files = [];
-            for(i in result.data.files) files.push(__buildGistFile(result.data.files[i]));
+            for(i in result.data.files) files.push(__gistFile(result.data.files[i]));
             var gist = {
                 description: result.data.description,
                 url: result.data.html_url,
@@ -239,17 +225,18 @@
         return this;
     }
     
-    ///////////////////////////////////////////////////////////////////////
-    //                          Object Builders
-    ///////////////////////////////////////////////////////////////////////
-    function __buildRepo(info) {
+    // Object builders
+    // ---------------
+    function __repo(info) {
 		var repo = {
+		    id:             info.id,
     		name:           info.name,
     		fullName:       info.full_name,
             language:       info.language,
-    		description:    info.description,
     		url:            info.url,
     		html_url:       info.html_url,
+            description:    info.description,
+            fork:           info.fork,
     		default_branch: info.default_branch,
     		stars:          info.stargazers_count,
     		forks:          info.forks_count,
@@ -259,7 +246,7 @@
 		return repo;
 	}
     
-    function __buildGistFile(info) {
+    function __gistFile(info) {
         var file = {
             name:     info.filename,
             language: info.language,
@@ -272,10 +259,20 @@
     
     // Utility functions
     // -----------------
+    function jsonp(url, callback) {
+        ghub.__jsonp_callback = function(result) {
+            callback(result);
+        }
+        var head   = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.setAttribute('src', url+'?callback=ghub.__jsonp_callback');
+        head.appendChild(script);
+        head.removeChild(script);
+    }
     
     // Run ghub in *noConflict* mode, returning the `ghub` variable to its
-  // previous owner.  
-  // Returns a reference to `ghub`.
+    // previous owner.  
+    // Returns a reference to `ghub`.
     ghub.noConflict = function () {
         root.ghub = previousGhub;
         return this;
