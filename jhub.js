@@ -1,22 +1,22 @@
-// [ghub](https://github.com/ChrTang/ghub) 2.0.0
+// [jHub](https://github.com/ChrTang/jHub) 2.0.0
 // (c) 2015 Christian Tang
 // Freely distributable under the MIT license.
 
 (function (root) {
     var loginName = '';
     
-    var previousGhub = root.ghub;
-    var ghub = {};
-    ghub.VERSION = '2.0.0';
+    var previous = root.jhub;
+    var jhub = {};
+    jhub.VERSION = '2.0.0';
     
-    ghub.init = function (loginName) {
+    jhub.init = function (loginName) {
         this.loginName = loginName;
         return this;
     }
     
     // Repositories
     // ------------
-    ghub.userRepos = function (callback) {
+    jhub.userRepos = function (callback) {
         jsonp('https://api.github.com/users/'+this.loginName+'/repos', function(result) {
             var tmp = [];
             for(i in result.data) {
@@ -28,7 +28,7 @@
         return this;
     }
     
-    ghub.starredRepos = function (callback) {
+    jhub.starredRepos = function (callback) {
         
         jsonp('https://api.github.com/users/'+this.loginName+'/starred', function(result) {
             var tmp = [];
@@ -43,13 +43,13 @@
     
     // Repository
     // ----------
-    ghub.userRepo = function (repoName) {
-        if (!(this instanceof ghub.userRepo)) return new ghub.userRepo(repoName);
+    jhub.userRepo = function (repoName) {
+        if (!(this instanceof jhub.userRepo)) return new jhub.userRepo(repoName);
         this.repoName  = repoName;
         this.loginName = loginName;
     };
     
-    ghub.userRepo.prototype.commits = function (callback) {
+    jhub.userRepo.prototype.commits = function (callback) {
         jsonp('https://api.github.com/repos/'+this.loginName+'/'+this.repoName+'/commits', function(result) {
                 var tmp = [];
                 
@@ -71,7 +71,7 @@
         });
         return this;
     }
-    ghub.userRepo.prototype.releases = function (callback) {
+    jhub.userRepo.prototype.releases = function (callback) {
         jsonp('https://api.github.com/repos/'+this.loginName+'/'+this.repoName+'/releases', function(result) {
                 var tmp = [];
                 for(i in result.data)
@@ -91,7 +91,7 @@
     
     // Organizations
     // -------------
-    ghub.userOrgs = function (callback) {
+    jhub.userOrgs = function (callback) {
         
         jsonp('https://api.github.com/users/'+this.loginName+'/orgs', function(result) {
             var tmp = [];
@@ -108,12 +108,12 @@
     
     // Organization
     // ------------
-    ghub.org = function (orgLogin) {
-        if (!(this instanceof ghub.org)) return new ghub.org(orgLogin);
+    jhub.org = function (orgLogin) {
+        if (!(this instanceof jhub.org)) return new jhub.org(orgLogin);
         this.orgLogin = orgLogin;
     };
     
-    ghub.org.prototype.get = function (callback) {
+    jhub.org.prototype.get = function (callback) {
         jsonp('https://api.github.com/orgs/'+this.orgLogin, function(result) {
             var org = {
                 id:           result.data.id,
@@ -129,7 +129,7 @@
         return this;
     }
     
-    ghub.org.prototype.members = function (callback) {
+    jhub.org.prototype.members = function (callback) {
         jsonp('https://api.github.com/orgs/'+this.orgLogin+'/public_members', function(result) {
             var tmp = [];
             for(i in result.data)
@@ -141,7 +141,7 @@
         return this;
     }
     
-    ghub.org.prototype.repos = function (callback) {
+    jhub.org.prototype.repos = function (callback) {
         jsonp("https://api.github.com/orgs/"+this.orgLogin+"/repos", function(result) {
             var tmp = []
             for(i in result.data)
@@ -156,12 +156,12 @@
     
     // User
     // ----
-    ghub.user = function (userLogin) {
-        if (!(this instanceof ghub.user)) return new ghub.user(userLogin);
+    jhub.user = function (userLogin) {
+        if (!(this instanceof jhub.user)) return new jhub.user(userLogin);
         this.userLogin = userLogin;
     };
     
-    ghub.user.prototype.get = function (callback) {
+    jhub.user.prototype.get = function (callback) {
         jsonp("https://api.github.com/users/"+this.userLogin, function(result) {
             var user = {};
             user.login = result.data.login;
@@ -179,7 +179,7 @@
     
     // Gists
     // -----
-    ghub.userGists = function (callback) {
+    jhub.userGists = function (callback) {
         
         jsonp('https://api.github.com/users/'+this.loginName+'/gists', function(result) {
             var tmp = [];
@@ -196,12 +196,12 @@
     
     // Gist
     // ----
-    ghub.gist = function (gistId) {
-        if (!(this instanceof ghub.gist)) return new ghub.gist(gistId);
+    jhub.gist = function (gistId) {
+        if (!(this instanceof jhub.gist)) return new jhub.gist(gistId);
         this.gistId = gistId;
     };
     
-    ghub.gist.prototype.files = function (callback) {
+    jhub.gist.prototype.files = function (callback) {
         jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
                 var files = [];
                 for(i in result.data.files)
@@ -211,7 +211,7 @@
         return this;
     }
     
-    ghub.gist.prototype.get = function (callback) {
+    jhub.gist.prototype.get = function (callback) {
         jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
             var files = [];
             for(i in result.data.files) files.push(__gistFile(result.data.files[i]));
@@ -260,31 +260,31 @@
     // Utility functions
     // -----------------
     function jsonp(url, callback) {
-        ghub.__jsonp_callback = function(result) {
+        jhub.__jsonp_callback = function(result) {
             callback(result);
         }
         var head   = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
-        script.setAttribute('src', url+'?callback=ghub.__jsonp_callback');
+        script.setAttribute('src', url+'?callback=jhub.__jsonp_callback');
         head.appendChild(script);
         head.removeChild(script);
     }
     
-    // Run ghub in *noConflict* mode, returning the `ghub` variable to its
+    // Run jHub in *noConflict* mode, returning the `jhub` variable to its
     // previous owner.  
-    // Returns a reference to `ghub`.
-    ghub.noConflict = function () {
-        root.ghub = previousGhub;
+    // Returns a reference to `jhub`.
+    jhub.noConflict = function () {
+        root.jhub = previous;
         return this;
     }
 
-  // Export `ghub` for CommonJS.
+  // Export `jHub` for CommonJS.
   if (typeof define === 'function' && define.amd) {
-    define('ghub', function () {
-        return ghub;
+    define('jhub', function () {
+        return jhub;
     });
   }
   else {
-    root.ghub = ghub;
+    root.jhub = jhub;
   }
 }(this));

@@ -1,11 +1,11 @@
-ghub
+jHub
 ==========
 JavaScript bindings for the GitHub API
 Examples
 --------
 ```javascript
 /* Get repositories */
-var git = ghub.init('TangChr');
+var git = jhub.init('TangChr');
 git.userRepos(function(result) {
   for(i in result) {
     console.log(result[i].name);
@@ -14,7 +14,7 @@ git.userRepos(function(result) {
 ```
 ```javascript
 /* Get starred repositories */
-var git = ghub.init('TangChr');
+var git = jhub.init('TangChr');
 git.starredRepos(function(result) {
   for(i in result) {
     console.log(result[i].name);
@@ -23,8 +23,8 @@ git.starredRepos(function(result) {
 ```
 ```javascript
 /* Get releases */
-var git = ghub.init('TangChr');
-var gh = git.userRepo('ghub');
+var git = jhub.init('TangChr');
+var gh = git.userRepo('jHub');
 gh.releases(function(result) {
   for(i in result)
     console.log(result[i].tagName + ': ' + result[i].name);
@@ -32,8 +32,8 @@ gh.releases(function(result) {
 ```
 ```javascript
 /* Get commits */
-var git = ghub.init('TangChr');
-var gh = git.userRepo('ghub');
+var git = jhub.init('TangChr');
+var gh = git.userRepo('jHub');
 gh.commits(function(result) {
   for(i in result)
     console.log(result[i].author);
@@ -41,3 +41,7 @@ gh.commits(function(result) {
     console.log(result[i].message);
 });
 ```
+
+Tools
+-----
+[jscompress.com](http://jscompress.com)
