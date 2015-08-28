@@ -1,0 +1,24 @@
+{
+  "name": "jhub",
+  "version": "2.0.0",
+  "description": "JavaScript bindings for the GitHub API",
+  "main": "jhub.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TangChr/jhub.git"
+  },
+  "keywords": [
+    "github",
+    "api",
+    "jhub",
+    "js",
+    "javascript",
+    "library"
+  ],
+  "author": "Christian Tang <christian@tcdev.dk> (http://christiantang.dk)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TangChr/jhub/issues"
+  },
+  "homepage": "https://github.com/TangChr/jhub"
+}
