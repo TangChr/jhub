@@ -1,6 +1,6 @@
-jHub
+jhub
 =======================
-This program is distributed under the terms of the MIT license. It's public, there are no restrictions, no copyright. Do whatever the hell you want with it!
+This program is distributed under the terms of the MIT license. It's public, there are no restrictions, no copyright.
 
 The MIT License (MIT)
 ---------------------

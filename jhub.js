@@ -1,4 +1,4 @@
-// [jHub](https://github.com/ChrTang/jHub) 2.0.0
+// [jhub](https://github.com/ChrTang/jhub) 2.0.0
 // (c) 2015 Christian Tang
 // Freely distributable under the MIT license.
 
@@ -270,7 +270,7 @@
         head.removeChild(script);
     }
     
-    // Run jHub in *noConflict* mode, returning the `jhub` variable to its
+    // Run jhub in *noConflict* mode, returning the `jhub` variable to its
     // previous owner.  
     // Returns a reference to `jhub`.
     jhub.noConflict = function () {
@@ -278,7 +278,7 @@
         return this;
     }
 
-  // Export `jHub` for CommonJS.
+  // Export `jhub` for CommonJS.
   if (typeof define === 'function' && define.amd) {
     define('jhub', function () {
         return jhub;
