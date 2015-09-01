@@ -1,4 +1,4 @@
-// [jhub](https://github.com/ChrTang/jhub) 2.0.0
+// [jhub](https://github.com/TangChr/jhub) 2.1.0
 // (c) 2015 Christian Tang
 // Freely distributable under the MIT license.
 
@@ -7,7 +7,7 @@
     
     var previous = root.jhub;
     var jhub = {};
-    jhub.VERSION = '2.0.0';
+    jhub.VERSION = '2.1.0';
     
     jhub.init = function (loginName) {
         this.loginName = loginName;
@@ -45,8 +45,14 @@
     // ----------
     jhub.userRepo = function (repoName) {
         if (!(this instanceof jhub.userRepo)) return new jhub.userRepo(repoName);
-        this.repoName  = repoName;
         this.loginName = loginName;
+        this.repoName  = repoName;
+    };
+    
+    jhub.userRepo = function (userName, repoName) {
+        if (!(this instanceof jhub.userRepo)) return new jhub.userRepo(userName, repoName);
+        this.loginName = userName;
+        this.repoName  = repoName;
     };
     
     jhub.userRepo.prototype.commits = function (callback) {
@@ -76,13 +82,48 @@
                 var tmp = [];
                 for(i in result.data)
                     tmp.push({
-                        tagName: result.data[i].tag_name,
-                        name:    result.data[i].name,
-                        branch:  result.data[i].target_commitish,
-                        draft:   result.data[i].draft,
-                        author:  { login: result.data[i].author.login, url: result.data[i].author.url },
-                        url:     result.data[i].html_url,
-                        
+                        id:         result.data[i].id,
+                        tagName:    result.data[i].tag_name,
+                        name:       result.data[i].name,
+                        author:     { login: result.data[i].author.login, url: result.data[i].author.url },
+                        branch:     result.data[i].target_commitish,
+                        draft:      result.data[i].draft,
+                        url:        result.data[i].html_url,
+                        zipballUrl: result.data[i].zipball_url,
+                        tarballUrl: result.data[i].tarball_url,
+                    });
+                callback(tmp);
+        });
+        return this;
+    }
+    
+    jhub.userRepo.prototype.tags = function (callback) {
+        jsonp('https://api.github.com/repos/'+this.loginName+'/'+this.repoName+'/tags', function(result) {
+                var tmp = [];
+                for(i in result.data)
+                    tmp.push({
+                        name:       result.data[i].name,
+                        zipballUrl: result.data[i].zipball_url,
+                        tarballUrl: result.data[i].tarball_url,
+                                    commit: {
+                                        sha: result.data[i].commit.sha,
+                                        url: result.data[i].commit.url
+                        }
+                    });
+                callback(tmp);
+        });
+        return this;
+    }
+    
+    jhub.userRepo.prototype.stargazers = function (callback) {
+        jsonp('https://api.github.com/repos/'+this.loginName+'/'+this.repoName+'/stargazers', function(result) {
+                var tmp = [];
+                for(i in result.data)
+                    tmp.push({
+                        id:      result.data[i].id,
+                        login:   result.data[i].login,
+                        htmlUrl: result.data[i].html_url,
+                        type:    result.data[i].type,
                     });
                 callback(tmp);
         });
@@ -97,7 +138,7 @@
             var tmp = [];
             for(i in result.data) {
                 tmp.push({
-                   id: result.data[i].id,
+                   id:    result.data[i].id,
                    login: result.data[i].login
                 });
 			}
@@ -121,8 +162,8 @@
                 name:         result.data.name,
                 description:  result.data.description,
                 blog:         result.data.blog,
-                html_url:     result.data.html_url,
-                public_repos: result.data.public_repos
+                htmlUrl:     result.data.html_url,
+                publicRepos: result.data.public_repos
             };
             callback(org);
         });
@@ -163,14 +204,16 @@
     
     jhub.user.prototype.get = function (callback) {
         jsonp("https://api.github.com/users/"+this.userLogin, function(result) {
-            var user = {};
-            user.login = result.data.login;
-            user.id = result.data.id;
-            user.name = result.data.name;
-            user.blog = result.data.blog;
-            user.company = result.data.company;
-            user.publicRepos = result.data.public_repos;
-            user.publicGists = result.data.public_gists;
+            var user = {
+                id:          result.data.id,
+                login:       result.data.login,
+                name:        result.data.name,
+                blog:        result.data.blog,
+                company:     result.data.company,
+                publicRepos: result.data.public_repos,
+                publicGists: result.data.public_gists,
+                type:        result.data.type
+            };
             callback(user);
         });
         return this;
@@ -185,9 +228,9 @@
             var tmp = [];
             for(i in result.data)
                 tmp.push({
-                    id: result.data[i].id,
+                    id:          result.data[i].id,
                     description: result.data[i].description,
-                    url: result.data[i].html_url
+                    url:         result.data[i].html_url
                 });
             callback(tmp);
         });
@@ -217,8 +260,8 @@
             for(i in result.data.files) files.push(__gistFile(result.data.files[i]));
             var gist = {
                 description: result.data.description,
-                url: result.data.html_url,
-                files: files
+                url:         result.data.html_url,
+                files:       files
             };
             callback(gist);
         });
@@ -229,19 +272,19 @@
     // ---------------
     function __repo(info) {
 		var repo = {
-		    id:             info.id,
-    		name:           info.name,
-    		fullName:       info.full_name,
-            language:       info.language,
-    		url:            info.url,
-    		html_url:       info.html_url,
-            description:    info.description,
-            fork:           info.fork,
-    		default_branch: info.default_branch,
-    		stars:          info.stargazers_count,
-    		forks:          info.forks_count,
-    		homepage:       info.homepage,
-    		has_pages:      info.has_pages
+		    id:            info.id,
+    		name:          info.name,
+    		fullName:      info.full_name,
+            language:      info.language,
+    		url:           info.url,
+    		htmlUrl:       info.html_url,
+            description:   info.description,
+            fork:          info.fork,
+    		defaultBranch: info.default_branch,
+    		stars:         info.stargazers_count,
+    		forks:         info.forks_count,
+    		homepage:      info.homepage,
+    		hasHages:      info.has_pages
 		};
 		return repo;
 	}
