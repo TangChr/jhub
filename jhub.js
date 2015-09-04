@@ -1,4 +1,4 @@
-// [jhub](https://github.com/TangChr/jhub) 2.1.0
+// [jhub](https://github.com/TangChr/jhub) 2.1.1
 // (c) 2015 Christian Tang
 // Freely distributable under the MIT license.
 
@@ -7,7 +7,7 @@
     
     var previous = root.jhub;
     var jhub = {};
-    jhub.VERSION = '2.1.0';
+    jhub.VERSION = '2.1.1';
     
     jhub.init = function (loginName) {
         this.loginName = loginName;
@@ -88,7 +88,7 @@
                         author:     { login: result.data[i].author.login, url: result.data[i].author.url },
                         branch:     result.data[i].target_commitish,
                         draft:      result.data[i].draft,
-                        url:        result.data[i].html_url,
+                        htmlUrl:    result.data[i].html_url,
                         zipballUrl: result.data[i].zipball_url,
                         tarballUrl: result.data[i].tarball_url,
                     });
@@ -105,10 +105,7 @@
                         name:       result.data[i].name,
                         zipballUrl: result.data[i].zipball_url,
                         tarballUrl: result.data[i].tarball_url,
-                                    commit: {
-                                        sha: result.data[i].commit.sha,
-                                        url: result.data[i].commit.url
-                        }
+                        commit:     { sha: result.data[i].commit.sha, url: result.data[i].commit.url }
                     });
                 callback(tmp);
         });
@@ -157,11 +154,11 @@
     jhub.org.prototype.get = function (callback) {
         jsonp('https://api.github.com/orgs/'+this.orgLogin, function(result) {
             var org = {
-                id:           result.data.id,
-                login:        result.data.login,
-                name:         result.data.name,
-                description:  result.data.description,
-                blog:         result.data.blog,
+                id:          result.data.id,
+                login:       result.data.login,
+                name:        result.data.name,
+                description: result.data.description,
+                blog:        result.data.blog,
                 htmlUrl:     result.data.html_url,
                 publicRepos: result.data.public_repos
             };
@@ -284,7 +281,8 @@
     		stars:         info.stargazers_count,
     		forks:         info.forks_count,
     		homepage:      info.homepage,
-    		hasHages:      info.has_pages
+    		hasHages:      info.has_pages,
+            owner:         { id: info.owner.id, login: info.owner.login, htmlUrl: info.owner.html_url }
 		};
 		return repo;
 	}
