@@ -7,7 +7,7 @@ JavaScript bindings for the GitHub API
 * [Advanced Examples](https://github.com/TangChr/jhub/wiki/Advanced-Examples)
 
 ## License
-This software is distributed under the terms of the [MIT license](https://github.com/TangChr/jhub/raw/master/LICENSE.md). It's public, there are no restrictions, no copyright.
+This software is distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Install
 ```
