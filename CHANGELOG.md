@@ -1,6 +1,14 @@
 Change log
 ==========
 
+## 2.2.0 (2015-09-09)
+
+**Features**
+
+* Added gitUrl, sshUrl, cloneUrl to repos.
+* Added createdAt, updatedAt and pushedAt to repositories.
+* Added id, pullUrl and pushUrl to gist.get().
+
 ## 2.1.1 (2015-09-05)
 
 **Features**

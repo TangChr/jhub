@@ -1,4 +1,4 @@
-// [jhub](https://github.com/TangChr/jhub) 2.1.1
+// [jhub](https://github.com/TangChr/jhub) 2.2.0
 // (c) 2015 Christian Tang
 // Freely distributable under the MIT license.
 
@@ -7,7 +7,7 @@
     
     var previous = root.jhub;
     var jhub = {};
-    jhub.VERSION = '2.1.1';
+    jhub.VERSION = '2.2.0';
     
     jhub.init = function (loginName) {
         this.loginName = loginName;
@@ -256,8 +256,11 @@
             var files = [];
             for(i in result.data.files) files.push(__gistFile(result.data.files[i]));
             var gist = {
+                id:          result.data.id,
                 description: result.data.description,
                 url:         result.data.html_url,
+                pullUrl:     result.data.git_pull_url,
+                pushUrl:     result.data.git_push_url,
                 files:       files
             };
             callback(gist);
@@ -275,6 +278,12 @@
             language:      info.language,
     		url:           info.url,
     		htmlUrl:       info.html_url,
+            gitUrl:        info.git_url,
+            sshUrl:        info.ssh_url,
+            cloneUrl:      info.clone_url,
+            createdAt:     info.created_at,
+            updatedAt:     info.updated_at,
+            pushedAt:      info.pushed_at,
             description:   info.description,
             fork:          info.fork,
     		defaultBranch: info.default_branch,
