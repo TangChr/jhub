@@ -1,13 +1,13 @@
-// [jhub](https://github.com/TangChr/jhub) 2.2.0
+// [jhub](https://github.com/TangChr/jhub) 2.3.0
 // (c) 2015 Christian Tang
 // Freely distributable under the MIT license.
 
-(function (root) {
+(function () {
     var loginName = '';
     
-    var previous = root.jhub;
+    //var previous = root.jhub;
     var jhub = {};
-    jhub.VERSION = '2.2.0';
+    jhub.VERSION = '2.3.0';
     
     jhub.init = function (loginName) {
         this.loginName = loginName;
@@ -320,21 +320,8 @@
         head.removeChild(script);
     }
     
-    // Run jhub in *noConflict* mode, returning the `jhub` variable to its
-    // previous owner.  
-    // Returns a reference to `jhub`.
-    jhub.noConflict = function () {
-        root.jhub = previous;
-        return this;
-    }
-
-  // Export `jhub` for CommonJS.
-  if (typeof define === 'function' && define.amd) {
-    define('jhub', function () {
-        return jhub;
-    });
-  }
-  else {
-    root.jhub = jhub;
-  }
-}(this));
+    if("undefined" != typeof exports)
+      module.exports = jhub
+    else
+      window.jhub = jhub
+})()
