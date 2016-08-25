@@ -1,4 +1,4 @@
-require('jhub.js');
+var jhub = require('./jhub.js');
 
 jhub.init('TangChr');
 jhub.userRepos(function(repos) {
