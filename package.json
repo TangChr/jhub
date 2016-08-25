@@ -24,5 +24,11 @@
   "bugs": {
     "url": "https://github.com/TangChr/jhub/issues"
   },
-  "homepage": "http://willitcompile.net/projects/jhub"
+  "devDependencies": {
+    "jshint": "^2.9.3"
+  },
+  "homepage": "http://willitcompile.net/projects/jhub",
+  "scripts": {
+    "test": "./node_modules/jshint/bin/jshint test.js"
+  }
 }
