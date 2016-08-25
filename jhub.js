@@ -1,5 +1,5 @@
 // [jhub](https://github.com/TangChr/jhub) 2.3.0
-// (c) 2015 Christian Tang
+// (c) 2016 Christian Tang
 // Freely distributable under the MIT license.
 
 (function () {

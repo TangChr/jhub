@@ -1,6 +1,12 @@
 Change log
 ==========
 
+## 2.3.0 (2016-08-25)
+
+**Fixed**
+
+* Fixed support for node.js
+
 ## 2.2.0 (2015-09-09)
 
 **Features**
