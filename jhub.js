@@ -5,7 +5,6 @@
 (function () {
     var loginName = '';
     
-    //var previous = root.jhub;
     var jhub = {};
     jhub.VERSION = '2.3.0';
     
@@ -41,8 +40,8 @@
         return this; 
     }
     
-    // Repository
-    // ----------
+    // Repository Information
+    // ----------------------
     jhub.userRepo = function (repoName) {
         if (!(this instanceof jhub.userRepo)) return new jhub.userRepo(repoName);
         this.loginName = loginName;
@@ -144,8 +143,8 @@
         return this;
     }
     
-    // Organization
-    // ------------
+    // Organization Information
+    // ------------------------
     jhub.org = function (orgLogin) {
         if (!(this instanceof jhub.org)) return new jhub.org(orgLogin);
         this.orgLogin = orgLogin;
@@ -192,8 +191,8 @@
         return this;
     }
     
-    // User
-    // ----
+    // User Information
+    // ----------------
     jhub.user = function (userLogin) {
         if (!(this instanceof jhub.user)) return new jhub.user(userLogin);
         this.userLogin = userLogin;
@@ -234,8 +233,8 @@
         return this;
     }
     
-    // Gist
-    // ----
+    // Gist Information
+    // ----------------
     jhub.gist = function (gistId) {
         if (!(this instanceof jhub.gist)) return new jhub.gist(gistId);
         this.gistId = gistId;
@@ -307,8 +306,8 @@
         return file;
     }
     
-    // Utility functions
-    // -----------------
+    // JSON
+    // ----
     function jsonp(url, callback) {
         jhub.__jsonp_callback = function(result) {
             callback(result);
@@ -320,6 +319,8 @@
         head.removeChild(script);
     }
     
+    // node.js
+    // -------
     if("undefined" != typeof exports)
       module.exports = jhub
     else
