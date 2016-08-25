@@ -1,9 +1,8 @@
 require('jhub.js');
 
 jhub.init('TangChr');
-jhub.userGists(function(gists) {
-	var gList = '';
-	for (var g = 0; g < gists.length; g++) {
-	   console.log(gists[g].description);
+jhub.userRepos(function(repos) {
+	for (var r = 0; r < repos.length; r++) {
+	   console.log(repos[r].name);
 	}
 });
