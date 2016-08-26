@@ -4,6 +4,8 @@
 
 [![npm](http://img.shields.io/npm/v/jhub.svg)](https://www.npmjs.com/package/jhub)
 [![Release](https://img.shields.io/github/release/TangChr/jhub.svg)](https://github.com/TangChr/jhub/releases/latest)
+[![License](https://img.shields.io/github/license/TangChr/jhub.svg)](https://github.com/TangChr/jhub/blob/master/LICENSE)
+[![Dependencies](https://david-dm.org/TangChr/jhub.svg)](https://david-dm.org/TangChr/jhub)
 [![Build Status](https://travis-ci.org/TangChr/jhub.svg?branch=master)](https://travis-ci.org/TangChr/jhub)
 [![npm](http://img.shields.io/npm/dt/jhub.svg)](https://www.npmjs.com/package/jhub)
 
@@ -12,9 +14,6 @@ JavaScript bindings for the GitHub API
 ## Examples
 * [Repository info](https://github.com/TangChr/jhub/wiki/Examples)
 * [Advanced Examples](https://github.com/TangChr/jhub/wiki/Advanced-Examples)
-
-## License
-This software is distributed under the terms of the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Install
 ```
