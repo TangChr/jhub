@@ -204,11 +204,14 @@
                 id:          result.data.id,
                 login:       result.data.login,
                 name:        result.data.name,
-                blog:        result.data.blog,
                 company:     result.data.company,
+                blog:        result.data.blog,
+                location:    result.data.location,
+                bio:         result.data.bio,
                 publicRepos: result.data.public_repos,
                 publicGists: result.data.public_gists,
-                type:        result.data.type
+                followers:   result.data.followers,
+                following:   result.data.following
             };
             callback(user);
         });
