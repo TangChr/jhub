@@ -1,4 +1,4 @@
-// [jhub](https://github.com/TangChr/jhub) 2.3.0
+// [jhub](https://github.com/TangChr/jhub) 2.3.1
 // (c) 2016 Christian Tang
 // Freely distributable under the MIT license.
 
@@ -6,7 +6,7 @@
     var loginName = '';
     
     var jhub = {};
-    jhub.VERSION = '2.3.0';
+    jhub.VERSION = '2.3.1';
     
     jhub.init = function (loginName) {
         this.loginName = loginName;

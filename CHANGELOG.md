@@ -1,6 +1,13 @@
 Change log
 ==========
 
+## 2.3.1 (2016-08-26)
+
+**Features**
+
+* Added location, bio, following and followers to User Information
+* Updated test script (test.js)
+
 ## 2.3.0 (2016-08-25)
 
 **Fixed**
