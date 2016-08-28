@@ -12,7 +12,8 @@
 JavaScript bindings for the GitHub API.
 
 * Runs in [node.js](https://nodejs.org) apps and the browser.
-* No authentication
+* No authentication required.
+* Completely stand-alone. No dependencies (except for [jshint](https://www.npmjs.com/package/jshint) during testing).
 
 
 ## Examples
