@@ -11,16 +11,15 @@
 
 JavaScript bindings for the GitHub API.
 
-* Runs in [node.js](https://nodejs.org) apps and the browser.
+* Runs in [Node.js](https://nodejs.org) apps and the browser.
 * No authentication required.
-* Completely stand-alone. No dependencies (except for [jshint](https://www.npmjs.com/package/jshint) during testing).
+* Completely standalone. No dependencies ([jshint](https://www.npmjs.com/package/jshint) required for testing).
 
 
 ## Examples
 * [Retrieve repository info](https://github.com/TangChr/jhub/wiki/Examples)
 * [Advanced Examples](https://github.com/TangChr/jhub/wiki/Advanced-Examples)
 
-## Install
 ```
 npm install jhub
 ```
