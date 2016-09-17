@@ -27,4 +27,4 @@ tangchr.get(function(info) {
 	console.console.log(info.id);
 	console.console.log(info.login);
 	console.console.log(info.name);
-})
+});
