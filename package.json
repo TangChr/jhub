@@ -10,14 +10,12 @@
   "keywords": [
     "github",
     "gist",
+    "git",
     "repo",
     "api",
     "jhub",
     "js",
-    "javascript",
-    "library",
-    "node",
-    "nodejs"
+    "javascript"
   ],
   "author": "Christian Tang <christian@tcdev.dk> (http://seaweed.dk)",
   "license": "MIT",
@@ -25,6 +23,10 @@
     "url": "https://github.com/TangChr/jhub/issues"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-uglify": "^2.0.0",
     "jshint": "^2.9.3"
   },
   "homepage": "http://willitcompile.net/projects/jhub",
