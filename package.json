@@ -13,9 +13,7 @@
     "git",
     "repo",
     "api",
-    "jhub",
-    "js",
-    "javascript"
+    "jhub"
   ],
   "author": "Christian Tang <christian@tcdev.dk> (http://seaweed.dk)",
   "license": "MIT",
@@ -27,6 +25,8 @@
     "gulp-concat": "^2.6.0",
     "gulp-jshint": "^2.0.1",
     "gulp-uglify": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-header": "^1.8.8",
     "jshint": "^2.9.3"
   },
   "homepage": "http://willitcompile.net/projects/jhub",

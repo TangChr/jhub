@@ -1,4 +1,7 @@
+node_modules
 lib
-dist
 common
 .gitignore
+.gitattributes
+gulpfile.js
+.travis.yml
