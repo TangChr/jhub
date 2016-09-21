@@ -6,14 +6,16 @@
 [![npm](http://img.shields.io/npm/v/jhub.svg)](https://www.npmjs.com/package/jhub)
 [![License](https://img.shields.io/github/license/TangChr/jhub.svg)](https://raw.githubusercontent.com/TangChr/jhub/master/LICENSE)
 [![Dependencies](https://david-dm.org/TangChr/jhub.svg)](https://david-dm.org/TangChr/jhub)
+[![Dependencies](https://david-dm.org/TangChr/jhub/dev-status.svg)](https://david-dm.org/TangChr/jhub?type=dev)
 [![Build Status](https://travis-ci.org/TangChr/jhub.svg?branch=master)](https://travis-ci.org/TangChr/jhub)
 [![npm](http://img.shields.io/npm/dt/jhub.svg)](https://www.npmjs.com/package/jhub)
 
 JavaScript bindings for the GitHub API.
 
+* Get information from the GitHub API (Read-only).
 * Runs in [Node.js](https://nodejs.org) apps and the browser.
 * No authentication required.
-* Completely standalone. No dependencies ([jshint](https://www.npmjs.com/package/jshint) required for testing).
+* "Minified" version available.
 
 
 ## Examples
