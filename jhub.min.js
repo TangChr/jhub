@@ -1,6 +1,6 @@
 /**
  * jhub - JavaScript bindings for the GitHub API
- * @version 2.3.2
+ * @version 2.3.3
  * @link http://willitcompile.net/projects/jhub
  * @license MIT
  */

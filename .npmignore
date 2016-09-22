@@ -5,3 +5,5 @@ common
 .gitattributes
 gulpfile.js
 .travis.yml
+test.js
+jhub.min.js

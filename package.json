@@ -1,6 +1,6 @@
 {
   "name": "jhub",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "JavaScript bindings for the GitHub API",
   "main": "index",
   "repository": {
@@ -12,8 +12,8 @@
     "gist",
     "git",
     "repo",
-    "api",
-    "jhub"
+    "repository",
+    "api"
   ],
   "author": "Christian Tang <christian@tcdev.dk> (http://seaweed.dk)",
   "license": "MIT",
