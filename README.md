@@ -9,6 +9,7 @@
 [![Dependencies](https://david-dm.org/TangChr/jhub/dev-status.svg)](https://david-dm.org/TangChr/jhub?type=dev)
 [![Build Status](https://travis-ci.org/TangChr/jhub.svg?branch=master)](https://travis-ci.org/TangChr/jhub)
 [![npm](http://img.shields.io/npm/dt/jhub.svg)](https://www.npmjs.com/package/jhub)
+[![Documentation](http://inch-ci.org/github/TangChr/jhub.svg)](http://inch-ci.org/github/TangChr/jhub)
 
 JavaScript bindings for the GitHub API.
 
