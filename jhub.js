@@ -1,6 +1,6 @@
 /**
  * jhub - JavaScript bindings for the GitHub API
- * @version 2.3.3
+ * @version 2.3.4
  * @link http://willitcompile.net/projects/jhub
  * @license MIT
  */
@@ -37,8 +37,8 @@ function __repo(info) {
         gitUrl:        info.git_url,
         sshUrl:        info.ssh_url,
         cloneUrl:      info.clone_url,
-        createdAt:     info.created_at,
-        updatedAt:     info.updated_at,
+        created:       info.created_at,
+        updated:       info.updated_at,
         pushedAt:      info.pushed_at,
         description:   info.description,
         fork:          info.fork,
@@ -46,7 +46,7 @@ function __repo(info) {
         stars:         info.stargazers_count,
         forks:         info.forks_count,
         homepage:      info.homepage,
-        hasHages:      info.has_pages,
+        hasPages:      info.has_pages,
         owner:         { id: info.owner.id, login: info.owner.login, htmlUrl: info.owner.html_url }
     };
     return repo;

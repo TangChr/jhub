@@ -1,6 +1,12 @@
 Change log
 ==========
 
+## 2.3.4 (2016-10-08)
+
+**Fixed**
+
+* Fixed some typos
+
 ## 2.3.3 (2016-09-22)
 
 In one word: _gulp_
