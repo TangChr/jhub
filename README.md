@@ -18,11 +18,30 @@ JavaScript bindings for the GitHub API.
 * No authentication required.
 * "Minified" version available.
 
-
-## Examples
-* [Retrieve repository info](https://github.com/TangChr/jhub/wiki/Examples)
-* [Advanced Examples](https://github.com/TangChr/jhub/wiki/Advanced-Examples)
-
 ```
 npm install jhub
+```
+
+```javascript
+var jhub = require('jhub');
+
+jhub.init('TangChr');
+
+// List all repositories for user TangChr
+jhub.userRepos(function(repos) {
+    for(var r in repos) {
+        var repo = repos[r];
+        console.log(repo.name + ': ' + repo.htmlUrl);
+    }
+});
+
+// List all releases for repository TangChr/jhub. jhub must be initialized before this.
+// In this case, jhub.userRepo('TangChr', 'jhub') can also be used.
+var repo = jhub.userRepo('jhub');
+repo.releases(function(releases) {
+    for(var r in releases) {
+        var release = releases[r];
+        console.log(release.tagName + ': ' + release.name);
+    }
+});
 ```
