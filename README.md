@@ -1,15 +1,14 @@
 # jhub
 
-[![Join the chat at https://gitter.im/TangChr/jhub](https://img.shields.io/badge/chat-on%20gitter-yellow.svg)](https://gitter.im/TangChr/jhub)
+[![Release](https://img.shields.io/github/release/TangChr/jhub.svg?style=flat-square&label=Release)](https://github.com/TangChr/jhub/releases/latest)
+[![npm package](http://img.shields.io/npm/v/jhub.svg?style=flat-square&label=npm%20package)](https://www.npmjs.com/package/jhub)
+[![License](https://img.shields.io/github/license/TangChr/jhub.svg?style=flat-square&label=License)](https://raw.githubusercontent.com/TangChr/jhub/master/LICENSE)
+[![Join the chat at https://gitter.im/TangChr/jhub](https://img.shields.io/badge/chat-on%20gitter-yellow.svg?style=flat-square&label=Chat)](https://gitter.im/TangChr/jhub)
 
-[![Release](https://img.shields.io/github/release/TangChr/jhub.svg)](https://github.com/TangChr/jhub/releases/latest)
-[![npm](http://img.shields.io/npm/v/jhub.svg)](https://www.npmjs.com/package/jhub)
-[![License](https://img.shields.io/github/license/TangChr/jhub.svg)](https://raw.githubusercontent.com/TangChr/jhub/master/LICENSE)
-[![Dependencies](https://david-dm.org/TangChr/jhub.svg)](https://david-dm.org/TangChr/jhub)
-[![Dependencies](https://david-dm.org/TangChr/jhub/dev-status.svg)](https://david-dm.org/TangChr/jhub?type=dev)
-[![Build Status](https://travis-ci.org/TangChr/jhub.svg?branch=master)](https://travis-ci.org/TangChr/jhub)
-[![npm](http://img.shields.io/npm/dt/jhub.svg)](https://www.npmjs.com/package/jhub)
-[![Documentation](http://inch-ci.org/github/TangChr/jhub.svg)](http://inch-ci.org/github/TangChr/jhub)
+[![Build Status](https://img.shields.io/travis/TangChr/jhub.svg?style=flat-square&label=Build%20Status)](https://travis-ci.org/TangChr/jhub)
+[![Downloads](http://img.shields.io/npm/dt/jhub.svg?style=flat-square&label=Downloads)](https://www.npmjs.com/package/jhub)
+[![Dependencies](https://img.shields.io/david/TangChr/jhub.svg?style=flat-square&label=Dependencies)](https://david-dm.org/TangChr/jhub)
+[![devDependencies](https://img.shields.io/david/dev/TangChr/jhub.svg?style=flat-square)](https://david-dm.org/TangChr/jhub?type=dev)
 
 JavaScript bindings for the GitHub API.
 
