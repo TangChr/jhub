@@ -9,9 +9,18 @@ var uglify = require("gulp-uglify");
 var watch = require('gulp-watch');
 var stylish = require('jshint-stylish');
 var map = require('map-stream');
+var path = require('path');
 var events = require('events');
 var emmitter = new events.EventEmitter();
-var path = require('path');
+
+var pkg = require('./package.json');
+var banner = ['/**',
+  ' * <%= pkg.name %> - <%= pkg.description %>',
+  ' * @version <%= pkg.version %>',
+  ' * @link <%= pkg.homepage %>',
+  ' * @license <%= pkg.license %>',
+  ' */',
+  ''].join('\n');
 
 // Custom linting reporter used for error notify
 var jsHintErrorReporter = map(function (file, cb) {
@@ -36,15 +45,6 @@ var jsHintErrorReporter = map(function (file, cb) {
   }
   cb(null, file);
 });
-
-var pkg = require('./package.json');
-var banner = ['/**',
-  ' * <%= pkg.name %> - <%= pkg.description %>',
-  ' * @version <%= pkg.version %>',
-  ' * @link <%= pkg.homepage %>',
-  ' * @license <%= pkg.license %>',
-  ' */',
-  ''].join('\n');
 
 gulp.task('build', function () {
   return gulp.src(['./common/head.js',

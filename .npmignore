@@ -1,9 +1,8 @@
 node_modules
-lib
+src
 common
 .gitignore
 .gitattributes
 gulpfile.js
 .travis.yml
-test.js
 jhub.min.js

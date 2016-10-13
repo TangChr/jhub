@@ -1,6 +1,13 @@
 Change log
 ==========
 
+## 2.3.5 (2016-10-13)
+
+**Fixed**
+
+* Fixed bad JavaScript code
+* Updated the way Gulp tests jhub
+
 ## 2.3.4 (2016-10-08)
 
 **Fixed**
