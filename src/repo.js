@@ -4,9 +4,9 @@ jhub.userRepos = function (callback) {
     jsonp('https://api.github.com/users/'+this.githubUser+'/repos', function(result) {
         var tmp = [];
         for(var i in result.data) {
-		var r = __repo(result.data[i]);
-            tmp.push(r);
-	}
+      		var r = __repo(result.data[i]);
+          tmp.push(r);
+      	}
         callback(tmp);
     });
     return this;
@@ -16,9 +16,9 @@ jhub.starredRepos = function (callback) {
     jsonp('https://api.github.com/users/'+this.githubUser+'/starred', function(result) {
         var tmp = [];
         for(var i in result.data) {
-		var r = __repo(result.data[i]);
-            tmp.push(r);
-	}
+      		var r = __repo(result.data[i]);
+          tmp.push(r);
+      	}
         callback(tmp);
     });
     return this; 
@@ -27,13 +27,17 @@ jhub.starredRepos = function (callback) {
 // Repository Information
 // ----------------------
 jhub.userRepo = function (repoName) {
-    if (!(this instanceof jhub.userRepo)) return new jhub.userRepo(repoName);
+    if (!(this instanceof jhub.userRepo)) {
+      return new jhub.userRepo(repoName);
+    }
     this.githubUser = githubUser;
     this.repoName  = repoName;
 };
 
 jhub.userRepo = function (userName, repoName) {
-    if (!(this instanceof jhub.userRepo)) return new jhub.userRepo(userName, repoName);
+    if (!(this instanceof jhub.userRepo)) {
+      return new jhub.userRepo(userName, repoName);
+    }
     this.githubUser = userName;
     this.repoName  = repoName;
 };
@@ -42,7 +46,7 @@ jhub.userRepo.prototype.commits = function (callback) {
     jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/commits', function(result) {
             var tmp = [];
             
-            for(var i in result.data)
+            for(var i in result.data) {
                 tmp.push({
                     author: {
                         name:  result.data[i].author.name,
@@ -56,6 +60,7 @@ jhub.userRepo.prototype.commits = function (callback) {
                     },
                     message:   result.data[i].message
                 });
+            }
             callback(tmp);
     });
     return this;
@@ -64,7 +69,7 @@ jhub.userRepo.prototype.commits = function (callback) {
 jhub.userRepo.prototype.releases = function (callback) {
     jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/releases', function(result) {
             var tmp = [];
-            for(var i in result.data)
+            for(var i in result.data) {
                 tmp.push({
                     id:         result.data[i].id,
                     tagName:    result.data[i].tag_name,
@@ -76,6 +81,7 @@ jhub.userRepo.prototype.releases = function (callback) {
                     zipballUrl: result.data[i].zipball_url,
                     tarballUrl: result.data[i].tarball_url,
                 });
+            }
             callback(tmp);
     });
     return this;
@@ -84,13 +90,14 @@ jhub.userRepo.prototype.releases = function (callback) {
 jhub.userRepo.prototype.tags = function (callback) {
     jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/tags', function(result) {
             var tmp = [];
-            for(var i in result.data)
+            for(var i in result.data) {
                 tmp.push({
                     name:       result.data[i].name,
                     zipballUrl: result.data[i].zipball_url,
                     tarballUrl: result.data[i].tarball_url,
                     commit:     { sha: result.data[i].commit.sha, url: result.data[i].commit.url }
                 });
+            }
             callback(tmp);
     });
     return this;
@@ -99,13 +106,14 @@ jhub.userRepo.prototype.tags = function (callback) {
 jhub.userRepo.prototype.stargazers = function (callback) {
     jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/stargazers', function(result) {
             var tmp = [];
-            for(var i in result.data)
+            for(var i in result.data) {
                 tmp.push({
                     id:      result.data[i].id,
                     login:   result.data[i].login,
                     htmlUrl: result.data[i].html_url,
                     type:    result.data[i].type,
                 });
+            }
             callback(tmp);
     });
     return this;

@@ -1,9 +1,41 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var uglify = require("gulp-uglify");
 var header = require('gulp-header');
 var jshint = require('gulp-jshint');
+var notify = require('gulp-notify');
+var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
+var uglify = require("gulp-uglify");
+var watch = require('gulp-watch');
+var stylish = require('jshint-stylish');
+var map = require('map-stream');
+var events = require('events');
+var emmitter = new events.EventEmitter();
+var path = require('path');
+
+// Custom linting reporter used for error notify
+var jsHintErrorReporter = map(function (file, cb) {
+  if (!file.jshint.success) {
+    file.jshint.results.forEach(function (err) {
+      if (err) {
+        //console.log(err);
+
+        // Error message
+        var msg = [
+          path.basename(file.path),
+          'Line: ' + err.error.line,
+          'Reason: ' + err.error.reason
+        ];
+
+        // Emit this error event
+        emmitter.emit('error', new Error(msg.join('\n')));
+
+      }
+    });
+
+  }
+  cb(null, file);
+});
 
 var pkg = require('./package.json');
 var banner = ['/**',
@@ -17,14 +49,26 @@ var banner = ['/**',
 gulp.task('build', function () {
   return gulp.src(['./common/head.js',
                    './common/jsonp.js',
-                   './lib/*.js',
+                   './common/_obj.js',
+                   './src/*.js',
                    './common/footer.js'])
     .pipe(concat('jhub.js'))
     .pipe(header(banner, { pkg : pkg } ))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('uglify', ['build'], function() {
+gulp.task('lint', ['build'], function () {
+  gulp.src('./jhub.js')
+    .pipe(plumber())
+    .pipe(jshint('.jshintrc', {fail: true}))
+    .pipe(jshint.reporter(stylish)) // Console output
+    .pipe(jsHintErrorReporter) // If error pop up a notify alert
+    .on('error', notify.onError(function (error) {
+      return error.message;
+    }));
+});
+
+gulp.task('uglify', ['lint'], function() {
   gulp.src('./jhub.js')
   .pipe(uglify())
   .pipe(rename({ suffix: '.min' }))
@@ -32,10 +76,4 @@ gulp.task('uglify', ['build'], function() {
   .pipe(gulp.dest('./'));
 });
 
-gulp.task('test', ['uglify'], function() {
-  gulp.src('./jhub.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter());
-});
-
-gulp.task('default', ['build', 'uglify', 'test']);
+gulp.task('default', ['build', 'lint', 'uglify']);

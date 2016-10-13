@@ -1,7 +1,8 @@
 // node.js
 // -------
-if("undefined" != typeof exports)
+if('undefined' !== typeof exports) {
   module.exports = jhub;
-else
+} else {
   window.jhub = jhub;
+}
 })();

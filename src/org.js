@@ -8,7 +8,7 @@ jhub.userOrgs = function (callback) {
                id:    result.data[i].id,
                login: result.data[i].login
             });
-  }
+        }
         callback(tmp);
     });
     return this;
@@ -17,7 +17,9 @@ jhub.userOrgs = function (callback) {
 // Organization Information
 // ------------------------
 jhub.org = function (orgName) {
-    if (!(this instanceof jhub.org)) return new jhub.org(orgName);
+    if (!(this instanceof jhub.org)) {
+      return new jhub.org(orgName);
+    }
     this.orgName = orgName;
 };
 
@@ -40,8 +42,7 @@ jhub.org.prototype.get = function (callback) {
 jhub.org.prototype.members = function (callback) {
     jsonp('https://api.github.com/orgs/'+this.orgName+'/public_members', function(result) {
         var tmp = [];
-        for(var i in result.data)
-        {
+        for(var i in result.data) {
             tmp.push({ login: result.data[i].login});
         }
         callback(tmp);
@@ -50,10 +51,9 @@ jhub.org.prototype.members = function (callback) {
 };
 
 jhub.org.prototype.repos = function (callback) {
-    jsonp("https://api.github.com/orgs/"+this.orgName+"/repos", function(result) {
+    jsonp('https://api.github.com/orgs/'+this.orgName+'/repos', function(result) {
         var tmp = [];
-        for(var i in result.data)
-        {
+        for(var i in result.data) {
             var r = __repo(result.data[i]);
             tmp.push(r);
         }

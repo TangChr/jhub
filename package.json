@@ -23,14 +23,18 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
-    "gulp-jshint": "^2.0.1",
-    "gulp-uglify": "^2.0.0",
-    "gulp-rename": "^1.2.2",
     "gulp-header": "^1.8.8",
-    "jshint": "^2.9.3"
+    "gulp-jshint": "^2.0.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-watch": "^4.3.10",
+    "jshint": "^2.9.3",
+    "jshint-stylish": "^2.2.1",
+    "map-stream": "^0.0.6",
+    "events": "^1.1.1",
+    "path": "^0.12.7"
   },
-  "homepage": "http://willitcompile.net/projects/jhub",
-  "scripts": {
-    "test": "./node_modules/jshint/bin/jshint test.js"
-  }
+  "homepage": "http://willitcompile.net/projects/jhub"
 }

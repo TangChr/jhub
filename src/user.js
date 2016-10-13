@@ -1,12 +1,14 @@
 // User Information
 // ----------------
 jhub.user = function (name) {
-    if (!(this instanceof jhub.user)) return new jhub.user(name);
+    if (!(this instanceof jhub.user)) {
+      return new jhub.user(name);
+    }
     this.name = name;
 };
 
 jhub.user.prototype.get = function (callback) {
-    jsonp("https://api.github.com/users/"+this.name, function(result) {
+    jsonp('https://api.github.com/users/'+this.name, function(result) {
         var user = {
             id:          result.data.id,
             login:       result.data.login,
