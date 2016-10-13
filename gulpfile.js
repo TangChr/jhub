@@ -6,12 +6,10 @@ var notify = require('gulp-notify');
 var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
 var uglify = require("gulp-uglify");
-var watch = require('gulp-watch');
 var stylish = require('jshint-stylish');
 var map = require('map-stream');
 var path = require('path');
 var events = require('events');
-var emmitter = new events.EventEmitter();
 
 var pkg = require('./package.json');
 var banner = ['/**',
@@ -23,25 +21,21 @@ var banner = ['/**',
   ''].join('\n');
 
 // Custom linting reporter used for error notify
+var emmitter = new events.EventEmitter();
 var jsHintErrorReporter = map(function (file, cb) {
   if (!file.jshint.success) {
     file.jshint.results.forEach(function (err) {
       if (err) {
-        //console.log(err);
-
-        // Error message
         var msg = [
-          path.basename(file.path),
-          'Line: ' + err.error.line,
-          'Reason: ' + err.error.reason
+        path.basename(file.path),
+        'Line: ' + err.error.line,
+        'Reason: ' + err.error.reason
         ];
 
         // Emit this error event
         emmitter.emit('error', new Error(msg.join('\n')));
-
       }
     });
-
   }
   cb(null, file);
 });
@@ -53,7 +47,7 @@ gulp.task('build', function () {
                    './src/*.js',
                    './common/footer.js'])
     .pipe(concat('jhub.js'))
-    .pipe(header(banner, { pkg : pkg } ))
+    .pipe(header(banner, {pkg : pkg }))
     .pipe(gulp.dest('./'));
 });
 
@@ -72,7 +66,7 @@ gulp.task('uglify', ['lint'], function() {
   gulp.src('./jhub.js')
   .pipe(uglify())
   .pipe(rename({ suffix: '.min' }))
-  .pipe(header(banner, { pkg : pkg } ))
+  .pipe(header(banner, {pkg : pkg }))
   .pipe(gulp.dest('./'));
 });
 
