@@ -1,7 +1,7 @@
-node_modules
-common
+shared
 src
 logs
+.npmignore
 .gitignore
 .gitattributes
 *.log
@@ -11,5 +11,7 @@ npm-debug.log*
 */*/.DS_Store
 gulpfile.js
 .jshintrc
+.editorconfig
+.vscode
 .travis.yml
 jhub.min.js

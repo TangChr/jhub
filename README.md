@@ -27,7 +27,7 @@ var jhub = require('jhub');
 jhub.init('TangChr');
 
 // List all repositories for user TangChr
-jhub.userRepos(function(repos) {
+jhub.repos(function(repos) {
     for(var r in repos) {
         var repo = repos[r];
         console.log(repo.name + ': ' + repo.htmlUrl);
@@ -36,7 +36,7 @@ jhub.userRepos(function(repos) {
 
 // List all releases for repository TangChr/jhub. jhub must be initialized before this.
 // In this case, jhub.userRepo('TangChr', 'jhub') can also be used.
-var repo = jhub.userRepo('jhub');
+var repo = jhub.repo('jhub');
 repo.releases(function(releases) {
     for(var r in releases) {
         var release = releases[r];
