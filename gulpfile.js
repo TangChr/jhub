@@ -1,15 +1,15 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var header = require('gulp-header');
-var jshint = require('gulp-jshint');
-var notify = require('gulp-notify');
-var plumber = require('gulp-plumber');
-var rename = require('gulp-rename');
-var uglify = require("gulp-uglify");
-var stylish = require('jshint-stylish');
-var map = require('map-stream');
-var path = require('path');
-var events = require('events');
+var gulp = require('gulp'),
+    concat = require('gulp-concat'),
+    header = require('gulp-header'),
+    jshint = require('gulp-jshint'),
+    notify = require('gulp-notify'),
+    plumber = require('gulp-plumber'),
+    rename = require('gulp-rename'),
+    uglify = require("gulp-uglify"),
+    stylish = require('jshint-stylish'),
+    map = require('map-stream'),
+    path = require('path'),
+    events = require('events');
 
 var pkg = require('./package.json');
 var banner = ['/**',
@@ -41,11 +41,11 @@ var jsHintErrorReporter = map(function (file, cb) {
 });
 
 gulp.task('build', function () {
-  return gulp.src(['./common/head.js',
-                   './common/jsonp.js',
-                   './common/_obj.js',
+  return gulp.src(['./shared/module-head.js',
+                   './shared/jsonp.js',
+                   './shared/objects.js',
                    './src/*.js',
-                   './common/footer.js'])
+                   './shared/module-footer.js'])
     .pipe(concat('jhub.js'))
     .pipe(header(banner, {pkg : pkg }))
     .pipe(gulp.dest('./'));

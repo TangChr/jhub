@@ -26,38 +26,39 @@ jhub.org = function (orgName) {
 jhub.org.prototype.get = function (callback) {
     jsonp('https://api.github.com/orgs/'+this.orgLogin, function(result) {
         var org = {
-            id:          result.data.id,
-            login:       result.data.login,
-            name:        result.data.name,
+            id: result.data.id,
+            login: result.data.login,
+            name: result.data.name,
             description: result.data.description,
-            blog:        result.data.blog,
-            htmlUrl:     result.data.html_url,
+            blog: result.data.blog,
+            htmlUrl: result.data.html_url,
             publicRepos: result.data.public_repos
         };
         callback(org);
     });
+
     return this;
 };
 
 jhub.org.prototype.members = function (callback) {
     jsonp('https://api.github.com/orgs/'+this.orgName+'/public_members', function(result) {
-        var tmp = [];
+        var users = [];
         for(var i in result.data) {
-            tmp.push({ login: result.data[i].login});
+            users.push({login: result.data[i].login});
         }
-        callback(tmp);
+        callback(users);
     });
     return this;
 };
 
 jhub.org.prototype.repos = function (callback) {
     jsonp('https://api.github.com/orgs/'+this.orgName+'/repos', function(result) {
-        var tmp = [];
+        var repos = [];
         for(var i in result.data) {
             var r = __repo(result.data[i]);
-            tmp.push(r);
+            repos.push(r);
         }
-        callback(tmp);
+        callback(repos);
     });
     return this;
 };

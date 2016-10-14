@@ -2,7 +2,7 @@
   "node": true,
   "browser": true,
   "esnext": true,
-  "indent": 2,
+  "indent": 4,
   "laxcomma": true,
   "strict": true,
   "eqeqeq": true,

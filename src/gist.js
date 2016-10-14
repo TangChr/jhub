@@ -1,16 +1,17 @@
 // Gists
 // -----
-jhub.userGists = function (callback) {
+jhub.gists = function (callback) {
     jsonp('https://api.github.com/users/'+this.githubUser+'/gists', function(result) {
-        var tmp = [];
+        var gists = [];
         for(var i in result.data) {
-            tmp.push({
-                id:          result.data[i].id,
+            var gist = {
+                id: result.data[i].id,
                 description: result.data[i].description,
-                url:         result.data[i].html_url
-            });
+                url: result.data[i].html_url
+            };
+            gists.push(gist);
         }
-        callback(tmp);
+        callback(gists);
     });
     return this;
 };
@@ -19,7 +20,7 @@ jhub.userGists = function (callback) {
 // ----------------
 jhub.gist = function (gistId) {
     if (!(this instanceof jhub.gist)) {
-      return new jhub.gist(gistId);
+        return new jhub.gist(gistId);
     }
     this.gistId = gistId;
 };
