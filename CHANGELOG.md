@@ -1,6 +1,10 @@
 Change log
 ==========
 
+## 2.3.6 (2016-10-14)
+
+JavaScript Coding Conventions
+
 ## 2.3.5 (2016-10-13)
 
 **Fixed**
