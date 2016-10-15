@@ -2,6 +2,7 @@
 
 [![Release](https://img.shields.io/github/release/TangChr/jhub.svg?style=flat-square&label=Release)](https://github.com/TangChr/jhub/releases/latest)
 [![npm package](http://img.shields.io/npm/v/jhub.svg?style=flat-square&label=npm%20package)](https://www.npmjs.com/package/jhub)
+![Bower version](https://img.shields.io/bower/v/jhub.svg?style=flat-square&label=Bower)
 [![License](https://img.shields.io/github/license/TangChr/jhub.svg?style=flat-square&label=License)](https://raw.githubusercontent.com/TangChr/jhub/master/LICENSE)
 [![Join the chat at https://gitter.im/TangChr/jhub](https://img.shields.io/badge/chat-on%20gitter-yellow.svg?style=flat-square&label=Chat)](https://gitter.im/TangChr/jhub)
 
