@@ -1,6 +1,10 @@
 Change log
 ==========
 
+## 2.3.7 (2016-10-15)
+
+Bower
+
 ## 2.3.6 (2016-10-14)
 
 JavaScript Coding Conventions
