@@ -1,0 +1,22 @@
+{
+  "name": "jhub",
+  "description": "JavaScript bindings for the GitHub API",
+  "main": "jhub.js",
+  "authors": [
+    "Christian Tang <christian@tcdev.dk> (http://seaweed.dk)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "github",
+    "gist",
+    "git",
+    "repo",
+    "repository"
+  ],
+  "homepage": "https://github.com/TangChr/jhub",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
+}
