@@ -1,5 +1,4 @@
-// JSONP
-// ----
+/*exported jsonp*/
 function jsonp(url, callback) {
     jhub.__jsonp_callback = function(result) {
         callback(result);

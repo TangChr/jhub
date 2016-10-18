@@ -1,5 +1,13 @@
-// Gists
-// -----
+function __gistFile(info) {
+    var file = {
+        name:     info.filename,
+        language: info.language,
+        url:      info.raw_url,
+        size:     info.size,
+        type:     info.type
+    };
+    return file;
+}
 jhub.gists = function (callback) {
     jsonp('https://api.github.com/users/'+this.githubUser+'/gists', function(result) {
         var gists = [];
@@ -15,16 +23,12 @@ jhub.gists = function (callback) {
     });
     return this;
 };
-
-// Gist Information
-// ----------------
 jhub.gist = function (gistId) {
     if (!(this instanceof jhub.gist)) {
         return new jhub.gist(gistId);
     }
     this.gistId = gistId;
 };
-
 jhub.gist.prototype.files = function (callback) {
     jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
             var files = [];
@@ -35,7 +39,6 @@ jhub.gist.prototype.files = function (callback) {
     });
     return this;
 };
-
 jhub.gist.prototype.get = function (callback) {
     jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
         var files = [];

@@ -14,8 +14,7 @@ jhub.init = function (githubUser) {
     this.githubUser = githubUser;
     return this;
 };
-// JSONP
-// ----
+/*exported jsonp*/
 function jsonp(url, callback) {
     jhub.__jsonp_callback = function(result) {
         callback(result);
@@ -26,8 +25,110 @@ function jsonp(url, callback) {
     head.appendChild(script);
     head.removeChild(script);
 }
-// Object builders
-// ---------------
+function __gistFile(info) {
+    var file = {
+        name:     info.filename,
+        language: info.language,
+        url:      info.raw_url,
+        size:     info.size,
+        type:     info.type
+    };
+    return file;
+}
+jhub.gists = function (callback) {
+    jsonp('https://api.github.com/users/'+this.githubUser+'/gists', function(result) {
+        var gists = [];
+        for(var i in result.data) {
+            var gist = {
+                id: result.data[i].id,
+                description: result.data[i].description,
+                url: result.data[i].html_url
+            };
+            gists.push(gist);
+        }
+        callback(gists);
+    });
+    return this;
+};
+jhub.gist = function (gistId) {
+    if (!(this instanceof jhub.gist)) {
+        return new jhub.gist(gistId);
+    }
+    this.gistId = gistId;
+};
+jhub.gist.prototype.files = function (callback) {
+    jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
+            var files = [];
+            for(var i in result.data.files) {
+                files.push(__gistFile(result.data.files[i]));
+            }
+            callback(files);
+    });
+    return this;
+};
+jhub.gist.prototype.get = function (callback) {
+    jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
+        var files = [];
+        for(var i in result.data.files) {
+          files.push(__gistFile(result.data.files[i]));
+        }
+        var gist = {
+            id:          result.data.id,
+            description: result.data.description,
+            url:         result.data.html_url,
+            pullUrl:     result.data.git_pull_url,
+            pushUrl:     result.data.git_push_url,
+            files:       files
+        };
+        callback(gist);
+    });
+    return this;
+};
+jhub.userOrgs = function (callback) {
+    jsonp('https://api.github.com/users/'+this.githubUser+'/orgs', function(result) {
+        var tmp = [];
+        for(var i in result.data) {
+            tmp.push({
+               id:    result.data[i].id,
+               login: result.data[i].login
+            });
+        }
+        callback(tmp);
+    });
+    return this;
+};
+jhub.org = function (orgName) {
+    if (!(this instanceof jhub.org)) {
+      return new jhub.org(orgName);
+    }
+    this.orgName = orgName;
+};
+jhub.org.prototype.get = function (callback) {
+    jsonp('https://api.github.com/orgs/'+this.orgLogin, function(result) {
+        var org = {
+            id: result.data.id,
+            login: result.data.login,
+            name: result.data.name,
+            description: result.data.description,
+            blog: result.data.blog,
+            htmlUrl: result.data.html_url,
+            publicRepos: result.data.public_repos
+        };
+        callback(org);
+    });
+
+    return this;
+};
+jhub.org.prototype.members = function (callback) {
+    jsonp('https://api.github.com/orgs/'+this.orgName+'/public_members', function(result) {
+        var users = [];
+        for(var i in result.data) {
+            users.push({login: result.data[i].login});
+        }
+        callback(users);
+    });
+    return this;
+};
 function __repo(info) {
     var repo = {
         id:            info.id,
@@ -53,139 +154,6 @@ function __repo(info) {
     };
     return repo;
 }
-
-function __gistFile(info) {
-    var file = {
-        name:     info.filename,
-        language: info.language,
-        url:      info.raw_url,
-        size:     info.size,
-        type:     info.type
-    };
-    return file;
-}
-// Gists
-// -----
-jhub.gists = function (callback) {
-    jsonp('https://api.github.com/users/'+this.githubUser+'/gists', function(result) {
-        var gists = [];
-        for(var i in result.data) {
-            var gist = {
-                id: result.data[i].id,
-                description: result.data[i].description,
-                url: result.data[i].html_url
-            };
-            gists.push(gist);
-        }
-        callback(gists);
-    });
-    return this;
-};
-
-// Gist Information
-// ----------------
-jhub.gist = function (gistId) {
-    if (!(this instanceof jhub.gist)) {
-        return new jhub.gist(gistId);
-    }
-    this.gistId = gistId;
-};
-
-jhub.gist.prototype.files = function (callback) {
-    jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
-            var files = [];
-            for(var i in result.data.files) {
-                files.push(__gistFile(result.data.files[i]));
-            }
-            callback(files);
-    });
-    return this;
-};
-
-jhub.gist.prototype.get = function (callback) {
-    jsonp('https://api.github.com/gists/'+this.gistId, function(result) {
-        var files = [];
-        for(var i in result.data.files) {
-          files.push(__gistFile(result.data.files[i]));
-        }
-        var gist = {
-            id:          result.data.id,
-            description: result.data.description,
-            url:         result.data.html_url,
-            pullUrl:     result.data.git_pull_url,
-            pushUrl:     result.data.git_push_url,
-            files:       files
-        };
-        callback(gist);
-    });
-    return this;
-};
-// Organizations
-// -------------
-jhub.userOrgs = function (callback) {
-    jsonp('https://api.github.com/users/'+this.githubUser+'/orgs', function(result) {
-        var tmp = [];
-        for(var i in result.data) {
-            tmp.push({
-               id:    result.data[i].id,
-               login: result.data[i].login
-            });
-        }
-        callback(tmp);
-    });
-    return this;
-};
-
-// Organization Information
-// ------------------------
-jhub.org = function (orgName) {
-    if (!(this instanceof jhub.org)) {
-      return new jhub.org(orgName);
-    }
-    this.orgName = orgName;
-};
-
-jhub.org.prototype.get = function (callback) {
-    jsonp('https://api.github.com/orgs/'+this.orgLogin, function(result) {
-        var org = {
-            id: result.data.id,
-            login: result.data.login,
-            name: result.data.name,
-            description: result.data.description,
-            blog: result.data.blog,
-            htmlUrl: result.data.html_url,
-            publicRepos: result.data.public_repos
-        };
-        callback(org);
-    });
-
-    return this;
-};
-
-jhub.org.prototype.members = function (callback) {
-    jsonp('https://api.github.com/orgs/'+this.orgName+'/public_members', function(result) {
-        var users = [];
-        for(var i in result.data) {
-            users.push({login: result.data[i].login});
-        }
-        callback(users);
-    });
-    return this;
-};
-
-jhub.org.prototype.repos = function (callback) {
-    jsonp('https://api.github.com/orgs/'+this.orgName+'/repos', function(result) {
-        var repos = [];
-        for(var i in result.data) {
-            var r = __repo(result.data[i]);
-            repos.push(r);
-        }
-        callback(repos);
-    });
-    return this;
-};
-// Repositories
-// ------------
 jhub.repos = function (callback) {
     jsonp('https://api.github.com/users/'+this.githubUser+'/repos', function(result) {
         var repos = [];
@@ -197,7 +165,6 @@ jhub.repos = function (callback) {
     });
     return this;
 };
-
 jhub.starredRepos = function (callback) {
     jsonp('https://api.github.com/users/'+this.githubUser+'/starred', function(result) {
         var repos = [];
@@ -209,9 +176,6 @@ jhub.starredRepos = function (callback) {
     });
     return this;
 };
-
-// Repository Information
-// ----------------------
 jhub.repo = function (repoName) {
     if (!(this instanceof jhub.repo)) {
       return new jhub.repo(repoName);
@@ -219,7 +183,6 @@ jhub.repo = function (repoName) {
     this.githubUser = githubUser;
     this.repoName  = repoName;
 };
-
 jhub.repo = function (userName, repoName) {
     if (!(this instanceof jhub.repo)) {
       return new jhub.repo(userName, repoName);
@@ -227,7 +190,6 @@ jhub.repo = function (userName, repoName) {
     this.githubUser = userName;
     this.repoName  = repoName;
 };
-
 jhub.repo.prototype.commits = function (callback) {
     jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/commits', function(result) {
             var tmp = [];
@@ -251,7 +213,6 @@ jhub.repo.prototype.commits = function (callback) {
     });
     return this;
 };
-
 jhub.repo.prototype.releases = function (callback) {
     jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/releases', function(result) {
             var releases = [];
@@ -276,7 +237,6 @@ jhub.repo.prototype.releases = function (callback) {
     });
     return this;
 };
-
 jhub.repo.prototype.tags = function (callback) {
     jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/tags', function(result) {
         var tags = [];
@@ -296,7 +256,6 @@ jhub.repo.prototype.tags = function (callback) {
     });
     return this;
 };
-
 jhub.repo.prototype.stargazers = function (callback) {
     jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/stargazers', function(result) {
             var users = [];
@@ -313,15 +272,12 @@ jhub.repo.prototype.stargazers = function (callback) {
     });
     return this;
 };
-// User Information
-// ----------------
 jhub.user = function (name) {
     if (!(this instanceof jhub.user)) {
         return new jhub.user(name);
     }
     this.name = name;
 };
-
 jhub.user.prototype.get = function (callback) {
     jsonp('https://api.github.com/users/'+this.name, function(result) {
         var user = {

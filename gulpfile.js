@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     notify = require('gulp-notify'),
     plumber = require('gulp-plumber'),
     rename = require('gulp-rename'),
-    uglify = require("gulp-uglify"),
+    uglify = require('gulp-uglify'),
     stylish = require('jshint-stylish'),
     map = require('map-stream'),
     path = require('path'),
@@ -43,7 +43,6 @@ var jsHintErrorReporter = map(function (file, cb) {
 gulp.task('build', function () {
   return gulp.src(['./shared/module-head.js',
                    './shared/jsonp.js',
-                   './shared/objects.js',
                    './src/*.js',
                    './shared/module-footer.js'])
     .pipe(concat('jhub.js'))

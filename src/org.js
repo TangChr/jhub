@@ -1,5 +1,3 @@
-// Organizations
-// -------------
 jhub.userOrgs = function (callback) {
     jsonp('https://api.github.com/users/'+this.githubUser+'/orgs', function(result) {
         var tmp = [];
@@ -13,16 +11,12 @@ jhub.userOrgs = function (callback) {
     });
     return this;
 };
-
-// Organization Information
-// ------------------------
 jhub.org = function (orgName) {
     if (!(this instanceof jhub.org)) {
       return new jhub.org(orgName);
     }
     this.orgName = orgName;
 };
-
 jhub.org.prototype.get = function (callback) {
     jsonp('https://api.github.com/orgs/'+this.orgLogin, function(result) {
         var org = {
@@ -39,7 +33,6 @@ jhub.org.prototype.get = function (callback) {
 
     return this;
 };
-
 jhub.org.prototype.members = function (callback) {
     jsonp('https://api.github.com/orgs/'+this.orgName+'/public_members', function(result) {
         var users = [];
@@ -47,18 +40,6 @@ jhub.org.prototype.members = function (callback) {
             users.push({login: result.data[i].login});
         }
         callback(users);
-    });
-    return this;
-};
-
-jhub.org.prototype.repos = function (callback) {
-    jsonp('https://api.github.com/orgs/'+this.orgName+'/repos', function(result) {
-        var repos = [];
-        for(var i in result.data) {
-            var r = __repo(result.data[i]);
-            repos.push(r);
-        }
-        callback(repos);
     });
     return this;
 };
