@@ -1,8 +1,6 @@
-'use strict';
-
 (function () {
-var githubUser = '';
-var jhub = {};
+var githubUser = '',
+    jhub = {};
 
 jhub.init = function (githubUser) {
     this.githubUser = githubUser;

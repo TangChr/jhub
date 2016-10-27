@@ -41,10 +41,10 @@ var jsHintErrorReporter = map(function (file, cb) {
 });
 
 gulp.task('build', function () {
-  return gulp.src(['./shared/module-head.js',
-                   './shared/jsonp.js',
+  return gulp.src(['./common/module-head.js',
+                   './common/jsonp.js',
                    './src/*.js',
-                   './shared/module-footer.js'])
+                   './common/module-footer.js'])
     .pipe(concat('jhub.js'))
     .pipe(header(banner, {pkg : pkg }))
     .pipe(gulp.dest('./'));
