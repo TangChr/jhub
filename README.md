@@ -8,7 +8,6 @@
 
 [![Build Status](https://img.shields.io/travis/TangChr/jhub.svg?style=flat-square)](https://travis-ci.org/TangChr/jhub)
 [![Downloads](http://img.shields.io/npm/dt/jhub.svg?style=flat-square)](https://www.npmjs.com/package/jhub)
-[![Dependencies](https://img.shields.io/david/TangChr/jhub.svg?style=flat-square)](https://david-dm.org/TangChr/jhub)
 [![devDependencies](https://img.shields.io/david/dev/TangChr/jhub.svg?style=flat-square)](https://david-dm.org/TangChr/jhub?type=dev)
 
 JavaScript bindings for the GitHub API.
