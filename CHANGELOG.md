@@ -1,6 +1,11 @@
 Change log
 ==========
 
+## 2.3.8 (2016-11-29)
+
+* Maintenance update
+* Various changes and fixes (no new features)
+
 ## 2.3.7 (2016-10-15)
 
 Bower

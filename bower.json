@@ -1,6 +1,6 @@
 {
   "name": "jhub",
-  "version": "2.3.7",
+  "version": "2.3.8",
   "description": "JavaScript bindings for the GitHub API",
   "main": "jhub.js",
   "authors": [
