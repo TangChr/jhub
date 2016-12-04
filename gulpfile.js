@@ -9,7 +9,8 @@ var gulp = require('gulp'),
     stylish = require('jshint-stylish'),
     map = require('map-stream'),
     path = require('path'),
-    events = require('events');
+    events = require('events'),
+    fs = require('fs');
 
 var pkg = require('./package.json');
 var banner = ['/**',
@@ -22,22 +23,20 @@ var banner = ['/**',
 
 // Custom linting reporter used for error notify
 var emmitter = new events.EventEmitter();
-var jsHintErrorReporter = map(function (file, cb) {
-  if (!file.jshint.success) {
-    file.jshint.results.forEach(function (err) {
-      if (err) {
-        var msg = [
-        path.basename(file.path),
-        'Line: ' + err.error.line,
-        'Reason: ' + err.error.reason
-        ];
-
-        // Emit this error event
-        emmitter.emit('error', new Error(msg.join('\n')));
-      }
-    });
-  }
-  cb(null, file);
+    var jsHintErrorReporter = map(function (file, cb) {
+    if (!file.jshint.success) {
+        file.jshint.results.forEach(function (err) {
+        if (err) {
+            var msg = [
+                path.basename(file.path),
+                'Line: ' + err.error.line,
+                'Reason: ' + err.error.reason
+            ];
+            emmitter.emit('error', new Error(msg.join('\n')));
+        }
+        });
+    }
+    cb(null, file);
 });
 
 gulp.task('build', function () {
@@ -56,17 +55,26 @@ gulp.task('lint', ['build'], function () {
     .pipe(jshint('.jshintrc', {fail: true}))
     .pipe(jshint.reporter(stylish)) // Console output
     .pipe(jsHintErrorReporter) // If error pop up a notify alert
-    .on('error', notify.onError(function (error) {
-      return error.message;
+    .on('error', notify.onError(function (err) {
+      return err.message;
     }));
 });
 
 gulp.task('uglify', ['lint'], function() {
-  gulp.src('./jhub.js')
-  .pipe(uglify())
-  .pipe(rename({ suffix: '.min' }))
-  .pipe(header(banner, {pkg : pkg }))
-  .pipe(gulp.dest('./'));
+    gulp.src('./jhub.js')
+    .pipe(uglify())
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(header(banner, {pkg : pkg }))
+    .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ['build', 'lint', 'uglify']);
+gulp.task('index', ['uglify'], function() {
+    fs.writeFile('./index.js', 'module.exports = require(\'./jhub\');', function(err) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log('index.js created.');
+    });
+});
+
+gulp.task('default', ['build', 'lint', 'uglify', 'index']);
