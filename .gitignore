@@ -31,6 +31,9 @@ bower_components
 # Optional npm cache directory
 .npm
 
+# Visual Studio Code
+.vscode
+
 # Optional REPL history
 .node_repl_history
 
