@@ -6,8 +6,10 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
+    gutil = require('gulp-util'),
     stylish = require('jshint-stylish'),
     map = require('map-stream'),
+    chalk = require('chalk'),
     path = require('path'),
     events = require('events'),
     fs = require('fs');
@@ -68,13 +70,15 @@ gulp.task('uglify', ['lint'], function() {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('index', ['uglify'], function() {
+gulp.task('create-index', ['uglify'], function() {
     fs.writeFile('./index.js', 'module.exports = require(\'./jhub\');', function(err) {
         if(err) {
             return console.log(err);
         }
-        console.log('index.js created.');
+        else {
+            gutil.log(chalk.cyan('index.js created.'));
+        }
     });
 });
 
-gulp.task('default', ['build', 'lint', 'uglify', 'index']);
+gulp.task('default', ['build', 'lint', 'uglify', 'create-index']);

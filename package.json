@@ -29,9 +29,11 @@
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
     "jshint": "^2.9.4",
     "jshint-stylish": "^2.2.1",
-    "map-stream": "^0.1.0"
+    "map-stream": "^0.1.0",
+    "chalk": "^1.1.3"
   },
   "homepage": "http://willitcompile.net/projects/jhub"
 }
