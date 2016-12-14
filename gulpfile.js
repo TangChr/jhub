@@ -73,7 +73,7 @@ gulp.task('uglify', ['lint'], function() {
 gulp.task('create-index', ['uglify'], function() {
     fs.writeFile('./index.js', 'module.exports = require(\'./jhub\');', function(err) {
         if(err) {
-            return console.log(err);
+            return gutil.log(chalk.red(err));
         }
         else {
             gutil.log(chalk.cyan('index.js created.'));
