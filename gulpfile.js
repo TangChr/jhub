@@ -76,7 +76,8 @@ gulp.task('create-index', ['uglify'], function() {
             return gutil.log(chalk.red(err));
         }
         else {
-            gutil.log(chalk.cyan('index.js created.'));
+            var msg = 'Created ' + chalk.cyan('\'index.js\'');
+            gutil.log(msg);
         }
     });
 });
