@@ -10,10 +10,8 @@
   "keywords": [
     "github",
     "gist",
-    "git",
     "repo",
-    "repository",
-    "api"
+    "repository"
   ],
   "author": "Christian Tang <christian@tcdev.dk> (http://seaweed.dk)",
   "license": "MIT",
