@@ -1,6 +1,5 @@
 (function () {
-var githubUser = '',
-    jhub = {};
+var jhub = {};
 
 jhub.init = function (githubUser) {
     this.githubUser = githubUser;

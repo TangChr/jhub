@@ -24,7 +24,7 @@ function __repo(info) {
     return repo;
 }
 jhub.repos = function (callback) {
-    jsonp('https://api.github.com/users/'+this.githubUser+'/repos', function(result) {
+    jsonp('https://api.github.com/users/'+jhub.githubUser+'/repos', function(result) {
         var repos = [];
         for(var i in result.data) {
             var r = __repo(result.data[i]);
@@ -35,7 +35,7 @@ jhub.repos = function (callback) {
     return this;
 };
 jhub.starredRepos = function (callback) {
-    jsonp('https://api.github.com/users/'+this.githubUser+'/starred', function(result) {
+    jsonp('https://api.github.com/users/'+jhub.githubUser+'/starred', function(result) {
         var repos = [];
         for(var i in result.data) {
             var r = __repo(result.data[i]);
@@ -49,20 +49,12 @@ jhub.repo = function (repoName) {
     if (!(this instanceof jhub.repo)) {
       return new jhub.repo(repoName);
     }
-    this.githubUser = githubUser;
-    this.repoName  = repoName;
-};
-jhub.repo = function (userName, repoName) {
-    if (!(this instanceof jhub.repo)) {
-      return new jhub.repo(userName, repoName);
-    }
-    this.githubUser = userName;
     this.repoName  = repoName;
 };
 jhub.repo.prototype.commits = function (callback) {
-    jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/commits', function(result) {
+    jsonp('https://api.github.com/repos/'+jhub.githubUser+'/'+this.repoName+'/commits', function(result) {
             var tmp = [];
-            
+
             for(var i in result.data) {
                 tmp.push({
                     author: {
@@ -83,7 +75,7 @@ jhub.repo.prototype.commits = function (callback) {
     return this;
 };
 jhub.repo.prototype.releases = function (callback) {
-    jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/releases', function(result) {
+    jsonp('https://api.github.com/repos/'+jhub.githubUser+'/'+this.repoName+'/releases', function(result) {
             var releases = [];
             for(var i in result.data) {
                 var release = {
@@ -107,7 +99,7 @@ jhub.repo.prototype.releases = function (callback) {
     return this;
 };
 jhub.repo.prototype.tags = function (callback) {
-    jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/tags', function(result) {
+    jsonp('https://api.github.com/repos/'+jhub.githubUser+'/'+this.repoName+'/tags', function(result) {
         var tags = [];
         for(var i in result.data) {
             var tag = {
@@ -126,7 +118,7 @@ jhub.repo.prototype.tags = function (callback) {
     return this;
 };
 jhub.repo.prototype.stargazers = function (callback) {
-    jsonp('https://api.github.com/repos/'+this.githubUser+'/'+this.repoName+'/stargazers', function(result) {
+    jsonp('https://api.github.com/repos/'+jhub.githubUser+'/'+this.repoName+'/stargazers', function(result) {
             var users = [];
             for(var i in result.data) {
                 var user = {
@@ -138,6 +130,24 @@ jhub.repo.prototype.stargazers = function (callback) {
                 users.push(user);
             }
             callback(users);
+    });
+    return this;
+};
+jhub.repo.prototype.contributors = function (callback) {
+    jsonp('https://api.github.com/repos/'+jhub.githubUser+'/'+this.repoName+'/contributors', function(result) {
+            var contribs = [];
+            for(var i in result.data) {
+                var contrib = {
+                    id: result.data[i].id,
+                    login: result.data[i].login,
+                    url: result.data[i].url,
+                    htmlUrl: result.data[i].html_url,
+                    type: result.data[i].type,
+                    contributions: result.data[i].contributions
+                };
+                contribs.push(contrib);
+            }
+            callback(contribs);
     });
     return this;
 };
