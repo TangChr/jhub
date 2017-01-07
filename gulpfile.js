@@ -42,10 +42,10 @@ var emmitter = new events.EventEmitter();
 });
 
 gulp.task('build', function () {
-  return gulp.src(['./src/node/module-head.js',
+  return gulp.src(['./src/pkg/head.js',
                    './utils/jsonp.js',
                    './src/*.js',
-                   './src/node/module-footer.js'])
+                   './src/pkg/footer.js'])
     .pipe(concat('jhub.js'))
     .pipe(header(banner, {pkg : pkg }))
     .pipe(gulp.dest('./'));
