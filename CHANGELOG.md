@@ -1,6 +1,16 @@
 Change log
 ==========
 
+## 2.4.0 (2017-01-08)
+
+**Features**
+
+* Added support for reository contributors
+
+**Fixed**
+
+* Fixed "inconsistency" between node.js and native JavaScript implementation
+
 ## 2.3.8 (2016-11-29)
 
 * Maintenance update
