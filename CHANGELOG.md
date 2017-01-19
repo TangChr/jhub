@@ -1,6 +1,10 @@
 Change log
 ==========
 
+## 2.4.1 (2017-01-19)
+
+Removed Bower due to various issues
+
 ## 2.4.0 (2017-01-08)
 
 **Features**

@@ -2,7 +2,6 @@
 
 [![Release](https://img.shields.io/github/release/TangChr/jhub.svg?style=flat-square)](https://github.com/TangChr/jhub/releases/latest)
 [![npm package](http://img.shields.io/npm/v/jhub.svg?style=flat-square&label=npm%20package)](https://www.npmjs.com/package/jhub)
-![Bower version](https://img.shields.io/bower/v/jhub.svg?style=flat-square)
 [![License](https://img.shields.io/github/license/TangChr/jhub.svg?style=flat-square)](https://raw.githubusercontent.com/TangChr/jhub/master/LICENSE)
 [![Join the chat at https://gitter.im/TangChr/jhub](https://img.shields.io/badge/chat-on%20gitter-yellow.svg?style=flat-square)](https://gitter.im/TangChr/jhub)
 
@@ -35,7 +34,6 @@ jhub.repos(function(repos) {
 });
 
 // List all releases for repository TangChr/jhub. jhub must be initialized before this.
-// In this case, jhub.repo('TangChr', 'jhub') can also be used.
 var repo = jhub.repo('jhub');
 repo.releases(function(releases) {
     for(var r in releases) {
