@@ -33,5 +33,8 @@
     "jshint-stylish": "^2.2.1",
     "map-stream": "^0.1.0"
   },
+  "scripts": {
+      "build": "gulp"
+  },
   "homepage": "http://willitcompile.net/projects/jhub"
 }
