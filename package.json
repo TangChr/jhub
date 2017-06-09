@@ -34,7 +34,7 @@
     "map-stream": "^0.1.0"
   },
   "scripts": {
-      "build": "gulp"
+    "build": "gulp"
   },
   "homepage": "http://willitcompile.net/projects/jhub"
 }
