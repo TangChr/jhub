@@ -6,6 +6,15 @@ branches:
   only:
   - master
 
+install:
+  - npm -g install yarn
+  - yarn
+
 before_script:
+  - npm prune
+
 script:
   - npm run build
+
+notifications:
+  email: false
