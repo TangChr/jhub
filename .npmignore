@@ -5,6 +5,8 @@ src
 logs
 .npmignore
 .gitignore
+yarn.lock
+.yarnclean
 .gitattributes
 *.log
 npm-debug.log*
