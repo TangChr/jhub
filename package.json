@@ -19,10 +19,10 @@
     "url": "https://github.com/TangChr/jhub/issues"
   },
   "devDependencies": {
-    "chalk": "2.0.1",
+    "chalk": "2.3.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
-    "gulp-header": "^1.8.8",
+    "gulp-header": "2.0.5",
     "gulp-jshint": "^2.0.4",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
